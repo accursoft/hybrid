@@ -1,0 +1,173 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="SyncService" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsp:Policy wsu:Id="NetTcpBinding_ISyncService_policy">
+    <wsp:ExactlyOne>
+      <wsp:All>
+        <msb:BinaryEncoding xmlns:msb="http://schemas.microsoft.com/ws/06/2004/mspolicy/netbinary1">
+        </msb:BinaryEncoding>
+        <wsaw:UsingAddressing>
+        </wsaw:UsingAddressing>
+      </wsp:All>
+    </wsp:ExactlyOne>
+  </wsp:Policy>
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import namespace="http://tempuri.org/" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Microsoft.Synchronization.Data" />
+      <xsd:import />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Microsoft.Synchronization" />
+      <xsd:import namespace="http://schemas.microsoft.com/2009/04/sync/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Data" />
+      <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="ISyncService_GetScopeDescription_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetScopeDescription" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_GetScopeDescription_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetScopeDescriptionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_BeginSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:BeginSession" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_BeginSession_OutputMessage">
+    <wsdl:part name="parameters" element="tns:BeginSessionResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_GetIdFormats_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIdFormats" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_GetIdFormats_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIdFormatsResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_GetKnowledge_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetKnowledge" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_GetKnowledge_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetKnowledgeResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_GetChanges_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetChanges" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_GetChanges_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetChangesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_ApplyChanges_InputMessage">
+    <wsdl:part name="parameters" element="tns:ApplyChanges" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_ApplyChanges_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ApplyChangesResponse" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_EndSession_InputMessage">
+    <wsdl:part name="parameters" element="tns:EndSession" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_EndSession_OutputMessage">
+    <wsdl:part name="parameters" element="tns:EndSessionResponse" />
+  </wsdl:message>
+  <wsdl:portType msc:usingSession="true" name="ISyncService">
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetScopeDescription">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISyncService/GetScopeDescription" message="tns:ISyncService_GetScopeDescription_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISyncService/GetScopeDescriptionResponse" message="tns:ISyncService_GetScopeDescription_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="BeginSession">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISyncService/BeginSession" message="tns:ISyncService_BeginSession_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISyncService/BeginSessionResponse" message="tns:ISyncService_BeginSession_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetIdFormats">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISyncService/GetIdFormats" message="tns:ISyncService_GetIdFormats_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISyncService/GetIdFormatsResponse" message="tns:ISyncService_GetIdFormats_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetKnowledge">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISyncService/GetKnowledge" message="tns:ISyncService_GetKnowledge_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISyncService/GetKnowledgeResponse" message="tns:ISyncService_GetKnowledge_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetChanges">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISyncService/GetChanges" message="tns:ISyncService_GetChanges_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISyncService/GetChangesResponse" message="tns:ISyncService_GetChanges_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="ApplyChanges">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISyncService/ApplyChanges" message="tns:ISyncService_ApplyChanges_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISyncService/ApplyChangesResponse" message="tns:ISyncService_ApplyChanges_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="EndSession">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISyncService/EndSession" message="tns:ISyncService_EndSession_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISyncService/EndSessionResponse" message="tns:ISyncService_EndSession_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="NetTcpBinding_ISyncService" type="tns:ISyncService">
+    <wsp:PolicyReference URI="#NetTcpBinding_ISyncService_policy">
+    </wsp:PolicyReference>
+    <soap12:binding transport="http://schemas.microsoft.com/soap/tcp" />
+    <wsdl:operation name="GetScopeDescription">
+      <soap12:operation soapAction="http://tempuri.org/ISyncService/GetScopeDescription" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BeginSession">
+      <soap12:operation soapAction="http://tempuri.org/ISyncService/BeginSession" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIdFormats">
+      <soap12:operation soapAction="http://tempuri.org/ISyncService/GetIdFormats" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetKnowledge">
+      <soap12:operation soapAction="http://tempuri.org/ISyncService/GetKnowledge" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetChanges">
+      <soap12:operation soapAction="http://tempuri.org/ISyncService/GetChanges" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ApplyChanges">
+      <soap12:operation soapAction="http://tempuri.org/ISyncService/ApplyChanges" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EndSession">
+      <soap12:operation soapAction="http://tempuri.org/ISyncService/EndSession" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="SyncService">
+    <wsdl:port name="NetTcpBinding_ISyncService" binding="tns:NetTcpBinding_ISyncService">
+      <soap12:address location="net.tcp://localhost/SyncService" />
+      <wsa10:EndpointReference>
+        <wsa10:Address>net.tcp://localhost/SyncService</wsa10:Address>
+      </wsa10:EndpointReference>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

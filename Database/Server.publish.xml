@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TargetDatabaseName>Server</TargetDatabaseName>
+    <DeployScriptFileName>Server.sql</DeployScriptFileName>
+    <TargetConnectionString>Data Source=(local)\SQLFULL;Integrated Security=True;Pooling=False</TargetConnectionString>
+    <PublishDependentProjects>False</PublishDependentProjects>
+    <ProfileVersionNumber>1</ProfileVersionNumber>
+    <ScriptDatabaseOptions>True</ScriptDatabaseOptions>
+    <BlockIncrementalDeploymentIfDataLoss>True</BlockIncrementalDeploymentIfDataLoss>
+    <AlwaysCreateNewDatabase>True</AlwaysCreateNewDatabase>
+    <GenerateSmartDefaults>False</GenerateSmartDefaults>
+  </PropertyGroup>
+</Project>

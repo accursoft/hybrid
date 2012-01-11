@@ -1,0 +1,36 @@
+﻿<Window x:Class="Client.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:my1="clr-namespace:LocalData;assembly=LocalData"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="650"
+        Loaded="Window_Loaded" Closed="Window_Closed">
+    <Window.Resources>
+        <CollectionViewSource x:Key="customerViewSource" d:DesignSource="{d:DesignInstance my1:Customer, CreateList=True}" />
+        <CollectionViewSource x:Key="customerOrdersViewSource" Source="{Binding Path=Orders, Source={StaticResource customerViewSource}}" />
+    </Window.Resources>
+    <Grid DataContext="{StaticResource customerViewSource}">
+        <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="26,86,0,0" Name="customerDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="198">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Path=Name}" Header="Name" />
+                <DataGridTextColumn x:Name="regionColumn" Binding="{Binding Path=Region}" Header="Region" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource customerOrdersViewSource}}" Margin="256,86,0,0" Name="ordersDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="336" InitializingNewItem="ordersDataGrid_InitializingNewItem">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="itemColumn" Binding="{Binding Path=Item}" Header="Item" />
+                <DataGridTextColumn x:Name="costColumn" Binding="{Binding Path=Cost}" Header="Cost" />
+                <DataGridTemplateColumn x:Name="dateColumn" Header="Date">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <DatePicker SelectedDate="{Binding Path=Date, Mode=TwoWay, ValidatesOnExceptions=true, NotifyOnValidationError=true}" />
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Content="Sync" Height="23" HorizontalAlignment="Left" Margin="26,25,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="Synchronise" />
+    </Grid>
+</Window>
