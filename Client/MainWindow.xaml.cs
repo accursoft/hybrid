@@ -58,7 +58,7 @@ namespace Client
         void Refresh()
         {
             entities = new Entities();
-            entities.Customers.Load();
+            entities.Customers.Load(); 
             customerViewSource.Source = entities.Customers.Local;
         }
     }

@@ -9,13 +9,22 @@ namespace LocalData
     {
         public static void Synchronize()
         {
-            using (var local = new SqlConnection(Settings.Default.LocalData))
-            using (var proxy = new SyncProxy(Settings.Default.Scope))
-                new SyncOrchestrator() {
-                    LocalProvider = new SqlSyncProvider(Settings.Default.Scope, local),
-                    RemoteProvider = proxy,
-                    Direction = SyncDirectionOrder.DownloadAndUpload
-                }.Synchronize();
+            using (var local = new SqlConnection(Settings.Default.LocalData)) {
+                local.Open();
+
+                using (var proxy = new SyncProxy(Settings.Default.Scope))
+                    new SyncOrchestrator() {
+                        LocalProvider = new SqlSyncProvider(Settings.Default.Scope, local),
+                        RemoteProvider = proxy,
+                        Direction = SyncDirectionOrder.DownloadAndUpload
+                    }.Synchronize();
+
+                using (var reseed = new SqlCommand(Settings.Default.ResetID, local)) {
+                    reseed.Parameters.AddWithValue("min", Settings.Default.MinID);
+                    reseed.Parameters.AddWithValue("max", Settings.Default.MaxID);
+                    reseed.ExecuteNonQuery();
+                }
+            }
         }
 
         public static void Provision()
