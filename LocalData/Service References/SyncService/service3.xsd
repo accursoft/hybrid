@@ -97,4 +97,19 @@
       <xs:sequence />
     </xs:complexType>
   </xs:element>
+  <xs:element name="GetIdRange">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="machine" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GetIdRangeResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="min" type="xs:int" />
+        <xs:element minOccurs="0" name="max" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
 </xs:schema>

@@ -2,6 +2,8 @@
 using LocalData.Properties;
 using Microsoft.Synchronization;
 using Microsoft.Synchronization.Data.SqlServer;
+using LocalData.SyncService;
+using System;
 
 namespace LocalData
 {
@@ -19,11 +21,23 @@ namespace LocalData
                         Direction = SyncDirectionOrder.DownloadAndUpload
                     }.Synchronize();
 
-                using (var reseed = new SqlCommand(Settings.Default.ResetID, local)) {
+                using (var reseed = new SqlCommand(Settings.Default.ReseedID, local)) {
+                    if (Settings.Default.MaxID == 0) GetIdRange();
+
                     reseed.Parameters.AddWithValue("min", Settings.Default.MinID);
                     reseed.Parameters.AddWithValue("max", Settings.Default.MaxID);
                     reseed.ExecuteNonQuery();
                 }
+            }
+        }
+
+        static void GetIdRange()
+        {
+            using (var client = new SyncServiceClient()) {
+                int max;
+                Settings.Default.MinID = client.GetIdRange(out max, Environment.MachineName);
+                Settings.Default.MaxID = max;
+                Settings.Default.Save();
             }
         }
 
@@ -34,7 +48,7 @@ namespace LocalData
                 new SqlSyncScopeProvisioning(local, proxy.GetScopeDescription()).Apply();
         }
 
-        public static bool Provisioned()
+        public static bool IsProvisioned()
         {
             using (var local = new SqlConnection(Settings.Default.LocalData))
                 return new SqlSyncScopeProvisioning(local).ScopeExists(Settings.Default.Scope);

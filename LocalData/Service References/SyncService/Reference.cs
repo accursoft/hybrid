@@ -29,6 +29,12 @@ namespace LocalData.SyncService {
         uint GetKnowledge(out Microsoft.Synchronization.SyncKnowledge knowledge);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/GetChanges", ReplyAction="http://tempuri.org/ISyncService/GetChangesResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncIdFormatGroup))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ForgottenKnowledge))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncKnowledge))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ChangeBatch))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ConflictResolutionPolicy))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncSessionStatistics))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncContext))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncScopeProgress))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncTableProgress[]))]
@@ -40,17 +46,17 @@ namespace LocalData.SyncService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncColumnDescription))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncForeignKeyConstraint[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncForeignKeyConstraint))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ForgottenKnowledge))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncKnowledge))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncIdFormatGroup))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ChangeBatch))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ConflictResolutionPolicy))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncSessionStatistics))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Data.Rule))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
         Microsoft.Synchronization.ChangeBatch GetChanges(out object changeData, uint batchSize, Microsoft.Synchronization.SyncKnowledge destinationKnowledge);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/ApplyChanges", ReplyAction="http://tempuri.org/ISyncService/ApplyChangesResponse")]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncIdFormatGroup))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ForgottenKnowledge))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncKnowledge))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ChangeBatch))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ConflictResolutionPolicy))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncSessionStatistics))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncContext))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncScopeProgress))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncTableProgress[]))]
@@ -62,18 +68,16 @@ namespace LocalData.SyncService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncColumnDescription))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncForeignKeyConstraint[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncForeignKeyConstraint))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ForgottenKnowledge))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncKnowledge))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncIdFormatGroup))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ChangeBatch))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ConflictResolutionPolicy))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncSessionStatistics))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Data.Rule))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
         void ApplyChanges(Microsoft.Synchronization.ConflictResolutionPolicy resolutionPolicy, Microsoft.Synchronization.ChangeBatch sourceChanges, object changeData, ref Microsoft.Synchronization.SyncSessionStatistics sessionStatistics);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/EndSession", ReplyAction="http://tempuri.org/ISyncService/EndSessionResponse")]
         void EndSession();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/GetIdRange", ReplyAction="http://tempuri.org/ISyncService/GetIdRangeResponse")]
+        [return: System.ServiceModel.MessageParameterAttribute(Name="min")]
+        int GetIdRange(out int max, string machine);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -129,6 +133,10 @@ namespace LocalData.SyncService {
         
         public void EndSession() {
             base.Channel.EndSession();
+        }
+        
+        public int GetIdRange(out int max, string machine) {
+            return base.Channel.GetIdRange(out max, machine);
         }
     }
 }

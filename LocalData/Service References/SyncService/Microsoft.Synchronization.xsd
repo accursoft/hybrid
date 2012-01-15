@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:ser="http://schemas.microsoft.com/2003/10/Serialization/" xmlns:tns="http://schemas.datacontract.org/2004/07/Microsoft.Synchronization" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Microsoft.Synchronization" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+  <xs:complexType name="SyncIdFormatGroup">
+    <xs:sequence>
+      <xs:element ref="xs:schema" />
+      <xs:any />
+    </xs:sequence>
+  </xs:complexType>
   <xs:complexType name="ForgottenKnowledge">
     <xs:sequence>
       <xs:element ref="xs:schema" />
@@ -8,12 +14,6 @@
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="SyncKnowledge">
-    <xs:sequence>
-      <xs:element ref="xs:schema" />
-      <xs:any />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:complexType name="SyncIdFormatGroup">
     <xs:sequence>
       <xs:element ref="xs:schema" />
       <xs:any />

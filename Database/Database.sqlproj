@@ -27,7 +27,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{d9cc5107-5f9d-44cf-a740-555980a07cfd}</ProjectGuid>
     <GenerateDatabaseFile>False</GenerateDatabaseFile>
-    <GenerateCreateScript>False</GenerateCreateScript>
+    <GenerateCreateScript>True</GenerateCreateScript>
     <SqlServerVerification>False</SqlServerVerification>
     <TargetLanguage>CS</TargetLanguage>
     <AllowSnapshotIsolation>True</AllowSnapshotIsolation>
@@ -132,9 +132,13 @@
     <Build Include="Schema Objects\Tables\Orders.table.sql">
       <SubType>Code</SubType>
     </Build>
+    <Build Include="Schema Objects\Tables\IdRanges.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Server.publish.xml" />
     <None Include="Sync.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <RefactorLog Include="Database.refactorlog" />
   </ItemGroup>
 </Project>

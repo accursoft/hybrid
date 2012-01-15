@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Operations Version="1.0">
+  <Operation Name="Rename Refactor" Key="31e79dda-11fb-436d-b3e3-ef1794969c5b" ChangeDateTime="01/15/2012 13:21:04">
+    <Property Name="ElementName" Value="[dbo].[IdRanges].[Computer]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[IdRanges]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="Machine" />
+  </Operation>
+</Operations>

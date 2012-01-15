@@ -21,7 +21,7 @@ namespace Client
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if (!Sync.Provisioned()) Sync.Provision();
+            if (!Sync.IsProvisioned()) Sync.Provision();
             customerViewSource = ((CollectionViewSource) (FindResource("customerViewSource")));
             customerOrdersViewSource = ((CollectionViewSource) (FindResource("customerOrdersViewSource")));
 

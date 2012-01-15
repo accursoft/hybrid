@@ -14,10 +14,10 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
-      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Microsoft.Synchronization.Data" />
-      <xsd:import />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/Microsoft.Synchronization" />
       <xsd:import namespace="http://schemas.microsoft.com/2009/04/sync/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Microsoft.Synchronization.Data" />
+      <xsd:import />
       <xsd:import namespace="http://schemas.datacontract.org/2004/07/System.Data" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
@@ -64,6 +64,12 @@
   <wsdl:message name="ISyncService_EndSession_OutputMessage">
     <wsdl:part name="parameters" element="tns:EndSessionResponse" />
   </wsdl:message>
+  <wsdl:message name="ISyncService_GetIdRange_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIdRange" />
+  </wsdl:message>
+  <wsdl:message name="ISyncService_GetIdRange_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIdRangeResponse" />
+  </wsdl:message>
   <wsdl:portType msc:usingSession="true" name="ISyncService">
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetScopeDescription">
       <wsdl:input wsaw:Action="http://tempuri.org/ISyncService/GetScopeDescription" message="tns:ISyncService_GetScopeDescription_InputMessage" />
@@ -92,6 +98,10 @@
     <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="EndSession">
       <wsdl:input wsaw:Action="http://tempuri.org/ISyncService/EndSession" message="tns:ISyncService_EndSession_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ISyncService/EndSessionResponse" message="tns:ISyncService_EndSession_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation msc:isInitiating="true" msc:isTerminating="false" name="GetIdRange">
+      <wsdl:input wsaw:Action="http://tempuri.org/ISyncService/GetIdRange" message="tns:ISyncService_GetIdRange_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ISyncService/GetIdRangeResponse" message="tns:ISyncService_GetIdRange_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_ISyncService" type="tns:ISyncService">
@@ -154,6 +164,15 @@
     </wsdl:operation>
     <wsdl:operation name="EndSession">
       <soap12:operation soapAction="http://tempuri.org/ISyncService/EndSession" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetIdRange">
+      <soap12:operation soapAction="http://tempuri.org/ISyncService/GetIdRange" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

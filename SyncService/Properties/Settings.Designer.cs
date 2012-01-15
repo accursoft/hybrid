@@ -32,5 +32,23 @@ namespace SyncService.Properties {
                 return ((string)(this["Server"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("10000")]
+        public int IdRange {
+            get {
+                return ((int)(this["IdRange"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int StartId {
+            get {
+                return ((int)(this["StartId"]));
+            }
+        }
     }
 }

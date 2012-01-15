@@ -43,21 +43,27 @@ namespace LocalData.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-32768")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int MinID {
             get {
                 return ((int)(this["MinID"]));
             }
+            set {
+                this["MinID"] = value;
+            }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("-1")]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
         public int MaxID {
             get {
                 return ((int)(this["MaxID"]));
+            }
+            set {
+                this["MaxID"] = value;
             }
         }
         
@@ -68,9 +74,9 @@ select @ID = isnull(max(ID), @min) from Customers where ID between @min and @max
 DBCC CHECKIDENT (Customers, RESEED, @ID);
 select @ID = isnull(max(ID), @min) from Orders where ID between @min and @max;
 DBCC CHECKIDENT (Orders, RESEED, @ID);")]
-        public string ResetID {
+        public string ReseedID {
             get {
-                return ((string)(this["ResetID"]));
+                return ((string)(this["ReseedID"]));
             }
         }
     }

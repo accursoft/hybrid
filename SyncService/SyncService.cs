@@ -1,5 +1,5 @@
-﻿using System.Data.SqlClient;
-using Microsoft.Synchronization;
+﻿﻿using System.Linq;
+using System.Data.SqlClient;using Microsoft.Synchronization;
 using Microsoft.Synchronization.Data;
 using Microsoft.Synchronization.Data.SqlServer;
 
@@ -47,6 +47,22 @@ namespace SyncService
         {
             provider.Dispose();
             provider = null;
+        }
+
+        public void GetIdRange(string machine, out int min, out int max)
+        {
+            IdRange range;
+            using (var context = new IdRangesDataContext()) {
+                if ((range = context.IdRanges.SingleOrDefault(r => r.Machine == machine)) == null) {
+                    range = new IdRange() { Machine = machine };
+                    range.Min = (context.IdRanges.Max(r => (int?) r.Max) ?? Settings.Default.StartId - 1) + 1;
+                    range.Max = range.Min + Settings.Default.IdRange - 1;
+                    context.IdRanges.InsertOnSubmit(range);
+                    context.SubmitChanges();
+                }
+                min = range.Min;
+                max = range.Max;
+            }
         }
     }
 }
