@@ -138,7 +138,4 @@
     <None Include="Server.publish.xml" />
     <None Include="Sync.config" />
   </ItemGroup>
-  <ItemGroup>
-    <RefactorLog Include="Database.refactorlog" />
-  </ItemGroup>
 </Project>

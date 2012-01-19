@@ -1,9 +1,9 @@
-﻿using System.Data.SqlClient;
+﻿using System;
+using System.Data.SqlClient;
 using LocalData.Properties;
+using LocalData.SyncService;
 using Microsoft.Synchronization;
 using Microsoft.Synchronization.Data.SqlServer;
-using LocalData.SyncService;
-using System;
 
 namespace LocalData
 {
@@ -34,9 +34,9 @@ namespace LocalData
         static void GetIdRange()
         {
             using (var client = new SyncServiceClient()) {
-                int max;
-                Settings.Default.MinID = client.GetIdRange(out max, Environment.MachineName);
-                Settings.Default.MaxID = max;
+                var range = client.GetIdRange(Environment.MachineName);
+                Settings.Default.MinID = range.Min;
+                Settings.Default.MaxID = range.Max;
                 Settings.Default.Save();
             }
         }

@@ -8,8 +8,69 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LocalData.SyncService {
-    
+namespace LocalData.SyncService
+{
+
+
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Range", Namespace="http://schemas.datacontract.org/2004/07/SyncService")]
+    [System.SerializableAttribute()]
+    public partial struct Range : System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int MaxField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int MinField;
+        
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Max {
+            get {
+                return this.MaxField;
+            }
+            set {
+                if ((this.MaxField.Equals(value) != true)) {
+                    this.MaxField = value;
+                    this.RaisePropertyChanged("Max");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Min {
+            get {
+                return this.MinField;
+            }
+            set {
+                if ((this.MinField.Equals(value) != true)) {
+                    this.MinField = value;
+                    this.RaisePropertyChanged("Min");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SyncService.ISyncService", SessionMode=System.ServiceModel.SessionMode.Required)]
@@ -48,6 +109,7 @@ namespace LocalData.SyncService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncForeignKeyConstraint))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Data.Rule))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(LocalData.SyncService.Range))]
         Microsoft.Synchronization.ChangeBatch GetChanges(out object changeData, uint batchSize, Microsoft.Synchronization.SyncKnowledge destinationKnowledge);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/ApplyChanges", ReplyAction="http://tempuri.org/ISyncService/ApplyChangesResponse")]
@@ -70,14 +132,14 @@ namespace LocalData.SyncService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncForeignKeyConstraint))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Data.Rule))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(LocalData.SyncService.Range))]
         void ApplyChanges(Microsoft.Synchronization.ConflictResolutionPolicy resolutionPolicy, Microsoft.Synchronization.ChangeBatch sourceChanges, object changeData, ref Microsoft.Synchronization.SyncSessionStatistics sessionStatistics);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/EndSession", ReplyAction="http://tempuri.org/ISyncService/EndSessionResponse")]
         void EndSession();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/GetIdRange", ReplyAction="http://tempuri.org/ISyncService/GetIdRangeResponse")]
-        [return: System.ServiceModel.MessageParameterAttribute(Name="min")]
-        int GetIdRange(out int max, string machine);
+        LocalData.SyncService.Range GetIdRange(string machine);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -135,8 +197,8 @@ namespace LocalData.SyncService {
             base.Channel.EndSession();
         }
         
-        public int GetIdRange(out int max, string machine) {
-            return base.Channel.GetIdRange(out max, machine);
+        public LocalData.SyncService.Range GetIdRange(string machine) {
+            return base.Channel.GetIdRange(machine);
         }
     }
 }

@@ -90,7 +90,6 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
     <Reference Include="System.Runtime.Serialization" />
-    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
@@ -193,6 +192,9 @@
     <None Include="Service References\SyncService\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="Service References\SyncService\LocalData.SyncService.Range.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\SyncService\Microsoft.Synchronization.Data.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -210,6 +212,9 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SyncService\service3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SyncService\SyncService.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SyncService\System.Data.xsd">

@@ -31,6 +31,6 @@ namespace SyncService
         void EndSession();
 
         [OperationContract]
-        void GetIdRange(string machine, out int min, out int max);
+        Range GetIdRange(string machine);
     }
 }
