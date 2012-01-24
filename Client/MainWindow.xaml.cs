@@ -9,13 +9,14 @@ using System.Windows.Data;
 
 using Model;
 using SyncClient;
+using Proxy;
 
 namespace Client
 {
     public partial class MainWindow : Window
     {
         //entities
-        Repository.Repository repository = new Repository.Repository("name=LocalData");
+        IProxy proxy = new Online();
         IList<Customer> dirtyCustomers = new List<Customer>();
         IList<Order> dirtyOrders = new List<Order>();
 
@@ -31,8 +32,8 @@ namespace Client
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             //set up binding sources
-            customerViewSource = ((CollectionViewSource) (FindResource("customerViewSource")));
-            customerOrdersViewSource = ((CollectionViewSource) (FindResource("customerOrdersViewSource")));
+            customerViewSource = ((CollectionViewSource)(FindResource("customerViewSource")));
+            customerOrdersViewSource = ((CollectionViewSource)(FindResource("customerOrdersViewSource")));
 
             //bind to data
             if (!Sync.IsProvisioned()) Sync.Provision();
@@ -58,7 +59,7 @@ namespace Client
 
         void Save()
         {
-            repository.SaveChanges(dirtyCustomers, dirtyOrders);
+            proxy.SaveChanges(dirtyCustomers, dirtyOrders);
 
             dirtyCustomers.Clear();
             dirtyOrders.Clear();
@@ -66,15 +67,20 @@ namespace Client
 
         void Refresh()
         {
-            var customers = new ObservableCollection<Customer>(repository.GetCustomers());
+            var customers = new ObservableCollection<Customer>(proxy.GetCustomers());
 
             //track changes
+            //Automatic change tracking is enabled by default when deserialising.
+            //This doesn't happen when working offline, and we need to track deletes manually anyway, so all tracking is done manually.
             foreach (var customer in customers) {
+                customer.StopTracking();
                 ((INotifyPropertyChanged)customer).PropertyChanged += (sender, e) => PropertyChanged(dirtyCustomers, (Customer)sender, e);
 
                 customer.Orders.CollectionChanged += (sender, e) => CollectionChanged(dirtyOrders, e);
-                foreach (var order in customer.Orders)
+                foreach (var order in customer.Orders) {
+                    order.StopTracking();
                     ((INotifyPropertyChanged)order).PropertyChanged += (sender, e) => PropertyChanged(dirtyOrders, (Order)sender, e);
+                }
             }
 
             customers.CollectionChanged += (sender, e) => CollectionChanged(dirtyCustomers, e);

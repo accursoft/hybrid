@@ -137,9 +137,9 @@
       <Project>{3D4FA77D-0C6F-4DAE-A796-D27BD1C1543A}</Project>
       <Name>Model</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Repository\Repository.csproj">
-      <Project>{93EBB4B3-8ACA-4703-841C-2813F796B1FC}</Project>
-      <Name>Repository</Name>
+    <ProjectReference Include="..\Proxy\Proxy.csproj">
+      <Project>{AB53F250-4201-4A8E-9F66-276BBE2C5A5E}</Project>
+      <Name>Proxy</Name>
     </ProjectReference>
     <ProjectReference Include="..\SyncClient\SyncClient.csproj">
       <Project>{0DF1C3FF-450B-4C44-A1D3-3F52133A84EE}</Project>
