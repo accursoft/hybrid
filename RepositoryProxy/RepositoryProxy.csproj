@@ -8,8 +8,8 @@
     <ProjectGuid>{AB53F250-4201-4A8E-9F66-276BBE2C5A5E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Proxy</RootNamespace>
-    <AssemblyName>Proxy</AssemblyName>
+    <RootNamespace>RepositoryProxy</RootNamespace>
+    <AssemblyName>RepositoryProxy</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

@@ -6,7 +6,7 @@ using Model;
 namespace Repository
 {
     [ServiceContract]
-    public interface IRepositoryService
+    public interface IRepository
     {
         [OperationContract]
         IEnumerable<Customer> GetCustomers();

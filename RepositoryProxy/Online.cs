@@ -4,15 +4,15 @@ using System.Linq;
 using Model;
 using Repository;
 
-namespace Proxy
+namespace RepositoryProxy
 {
-    public class Online : IRepositoryService
+    public class Online : IRepository
     {
         public IEnumerable<Customer> GetCustomers()
         {
             IEnumerable<Customer> customers;
 
-            using (var repositoryService = new RepositoryService.RepositoryServiceClient())
+            using (var repositoryService = new RepositoryService.RepositoryClient())
                 customers = repositoryService.GetCustomers();
 
             //Automatic change tracking is enabled by default when deserialising.
@@ -29,7 +29,7 @@ namespace Proxy
 
         public int SaveChanges(IEnumerable<Customer> customers, IEnumerable<Order> orders)
         {
-            using (var repositoryService = new RepositoryService.RepositoryServiceClient())
+            using (var repositoryService = new RepositoryService.RepositoryClient())
                 return repositoryService.SaveChanges(customers.ToArray(), orders.ToArray());
         }
     }

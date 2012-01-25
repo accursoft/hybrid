@@ -8,16 +8,15 @@ using System.Windows.Controls;
 using System.Windows.Data;
 
 using Model;
-using Proxy;
 using Repository;
-using SyncClient;
+using RepositoryProxy;
 
 namespace Client
 {
     public partial class MainWindow : Window
     {
         //entities
-        IRepositoryService proxy = new Online();
+        IRepository proxy;
         ISet<Customer> dirtyCustomers = new HashSet<Customer>();
         ISet<Order> dirtyOrders = new HashSet<Order>();
 
@@ -25,40 +24,37 @@ namespace Client
         CollectionViewSource customerViewSource;
         CollectionViewSource customerOrdersViewSource;
 
-        public MainWindow()
+        MainWindow()
         {
             InitializeComponent();
         }
 
+        public MainWindow(bool online) : this()
+        {
+            proxy = online ? (IRepository)new Online() : (IRepository)new Offline();
+        }
+
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            //set up binding sources
             customerViewSource = ((CollectionViewSource)(FindResource("customerViewSource")));
             customerOrdersViewSource = ((CollectionViewSource)(FindResource("customerOrdersViewSource")));
 
-            //bind to data
-            if (!Sync.IsProvisioned()) Sync.Provision();
-            Refresh();
+            var customers = new ObservableCollection<Customer>(proxy.GetCustomers());
+
+            //track changes
+            foreach (var customer in customers) {
+                ((INotifyPropertyChanged)customer).PropertyChanged += (s, a) => PropertyChanged(dirtyCustomers, (Customer)s, a);
+                customer.Orders.CollectionChanged += (s, a) => CollectionChanged(dirtyOrders, a);
+
+                foreach (var order in customer.Orders)
+                    ((INotifyPropertyChanged)order).PropertyChanged += (s, a) => PropertyChanged(dirtyOrders, (Order)s, a);
+            }
+
+            customers.CollectionChanged += (s, a) => CollectionChanged(dirtyCustomers, a);
+            customerViewSource.Source = customers;
         }
 
         private void Window_Closed(object sender, System.EventArgs e)
-        {
-            Save();
-        }
-
-        private void Synchronise(object sender, RoutedEventArgs e)
-        {
-            Save();
-            Sync.Synchronize();
-            Refresh();
-        }
-
-        private void ordersDataGrid_InitializingNewItem(object sender, InitializingNewItemEventArgs e)
-        {
-            ((Order)(e.NewItem)).Date = DateTime.Now;
-        }
-
-        void Save()
         {
             proxy.SaveChanges(dirtyCustomers, dirtyOrders);
 
@@ -66,21 +62,9 @@ namespace Client
             dirtyOrders.Clear();
         }
 
-        void Refresh()
+        private void ordersDataGrid_InitializingNewItem(object sender, InitializingNewItemEventArgs e)
         {
-            var customers = new ObservableCollection<Customer>(proxy.GetCustomers());
-
-            //track changes
-            foreach (var customer in customers) {
-                ((INotifyPropertyChanged)customer).PropertyChanged += (sender, e) => PropertyChanged(dirtyCustomers, (Customer)sender, e);
-                customer.Orders.CollectionChanged += (sender, e) => CollectionChanged(dirtyOrders, e);
-
-                foreach (var order in customer.Orders)
-                    ((INotifyPropertyChanged)order).PropertyChanged += (sender, e) => PropertyChanged(dirtyOrders, (Order)sender, e);
-            }
-
-            customers.CollectionChanged += (sender, e) => CollectionChanged(dirtyCustomers, e);
-            customerViewSource.Source = customers;
+            ((Order)(e.NewItem)).Date = DateTime.Now;
         }
 
         static void CollectionChanged<T>(ISet<T> dirty, NotifyCollectionChangedEventArgs e) where T : IObjectWithChangeTracker

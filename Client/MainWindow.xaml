@@ -31,6 +31,5 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Button Content="Sync" Height="23" HorizontalAlignment="Left" Margin="26,25,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="Synchronise" />
     </Grid>
 </Window>

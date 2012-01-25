@@ -5,7 +5,7 @@ using Repository;
 
 namespace RepositoryService
 {
-    public class RepositoryService : IRepositoryService
+    public class RepositoryService : IRepository
     {
         Repository.Repository repository = new Repository.Repository("name=Server");
 
@@ -16,7 +16,7 @@ namespace RepositoryService
 
         public int SaveChanges(IEnumerable<Customer> customers, IEnumerable<Order> orders)
         {
-            return repository.SaveChanges(customers, orders, true);
+            return repository.SaveChanges(customers, orders);
         }
     }
 }

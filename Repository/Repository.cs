@@ -5,7 +5,7 @@ using Model;
 
 namespace Repository
 {
-    public class Repository
+    public class Repository : IRepository
     {
         readonly string connection;
 
@@ -20,13 +20,13 @@ namespace Repository
                 return entities.Customers.Include("Orders").ToList();
         }
 
-        //If the entities have been deserialised, automatically deleting a customer with orders will confuse the EF
-        public int SaveChanges(IEnumerable<Customer> customers, IEnumerable<Order> orders, bool deserialised)
+        public int SaveChanges(IEnumerable<Customer> customers, IEnumerable<Order> orders)
         {
             using (var entities = new Entities(connection)) {
 
                 foreach (var customer in customers)
-                    if (deserialised && customer.ChangeTracker.State == ObjectState.Deleted) {
+                    //Automatically deleting a customer with orders will confuse context
+                    if (customer.ChangeTracker.State == ObjectState.Deleted) {
                         entities.Customers.Attach(customer);
                         entities.Customers.DeleteObject(customer);
                     }

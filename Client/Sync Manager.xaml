@@ -1,0 +1,10 @@
+﻿<Window x:Class="Client.SyncManager"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Sync Manager" Height="300" Width="300">
+    <Grid>
+        <Button Content="Sync" Height="23" HorizontalAlignment="Left" Name="sync" VerticalAlignment="Top" Width="75" Click="Synchronize" Margin="92,54,0,0" />
+        <Button Content="Start Online" Height="23" HorizontalAlignment="Left" Name="online" VerticalAlignment="Top" Width="75" Click="online_Click" Margin="92,115,0,0" />
+        <Button Content="Start Offline" Height="23" HorizontalAlignment="Left" Name="offline" VerticalAlignment="Top" Width="75" Click="offline_Click" Margin="92,176,0,0" />
+    </Grid>
+</Window>

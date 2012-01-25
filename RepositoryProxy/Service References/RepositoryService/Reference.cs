@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Proxy.RepositoryService {
+namespace RepositoryProxy.RepositoryService {
     using System.Runtime.Serialization;
     using System;
     
@@ -24,7 +24,7 @@ namespace Proxy.RepositoryService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.CollectionDataContractAttribute(Name="ObjectsAddedToCollectionProperties", Namespace="http://schemas.datacontract.org/2004/07/Model", ItemName="AddedObjectsForProperty", KeyName="CollectionPropertyName", ValueName="AddedObjects")]
     [System.SerializableAttribute()]
-    public class ObjectsAddedToCollectionProperties : System.Collections.Generic.Dictionary<string, Proxy.RepositoryService.ObjectList> {
+    public class ObjectsAddedToCollectionProperties : System.Collections.Generic.Dictionary<string, RepositoryProxy.RepositoryService.ObjectList> {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -38,7 +38,7 @@ namespace Proxy.RepositoryService {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.CollectionDataContractAttribute(Name="ObjectsRemovedFromCollectionProperties", Namespace="http://schemas.datacontract.org/2004/07/Model", ItemName="DeletedObjectsForProperty", KeyName="CollectionPropertyName", ValueName="DeletedObjects")]
     [System.SerializableAttribute()]
-    public class ObjectsRemovedFromCollectionProperties : System.Collections.Generic.Dictionary<string, Proxy.RepositoryService.ObjectList> {
+    public class ObjectsRemovedFromCollectionProperties : System.Collections.Generic.Dictionary<string, RepositoryProxy.RepositoryService.ObjectList> {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -56,40 +56,40 @@ namespace Proxy.RepositoryService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="RepositoryService.IRepositoryService")]
-    public interface IRepositoryService {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="RepositoryService.IRepository")]
+    public interface IRepository {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRepositoryService/GetCustomers", ReplyAction="http://tempuri.org/IRepositoryService/GetCustomersResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRepository/GetCustomers", ReplyAction="http://tempuri.org/IRepository/GetCustomersResponse")]
         Model.Customer[] GetCustomers();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRepositoryService/SaveChanges", ReplyAction="http://tempuri.org/IRepositoryService/SaveChangesResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRepository/SaveChanges", ReplyAction="http://tempuri.org/IRepository/SaveChangesResponse")]
         int SaveChanges(Model.Customer[] customers, Model.Order[] orders);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IRepositoryServiceChannel : Proxy.RepositoryService.IRepositoryService, System.ServiceModel.IClientChannel {
+    public interface IRepositoryChannel : RepositoryProxy.RepositoryService.IRepository, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class RepositoryServiceClient : System.ServiceModel.ClientBase<Proxy.RepositoryService.IRepositoryService>, Proxy.RepositoryService.IRepositoryService {
+    public partial class RepositoryClient : System.ServiceModel.ClientBase<RepositoryProxy.RepositoryService.IRepository>, RepositoryProxy.RepositoryService.IRepository {
         
-        public RepositoryServiceClient() {
+        public RepositoryClient() {
         }
         
-        public RepositoryServiceClient(string endpointConfigurationName) : 
+        public RepositoryClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public RepositoryServiceClient(string endpointConfigurationName, string remoteAddress) : 
+        public RepositoryClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public RepositoryServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public RepositoryClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public RepositoryServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public RepositoryClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
