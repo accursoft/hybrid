@@ -17,8 +17,8 @@ namespace Client
     {
         //entities
         IProxy proxy = new Online();
-        IList<Customer> dirtyCustomers = new List<Customer>();
-        IList<Order> dirtyOrders = new List<Order>();
+        ISet<Customer> dirtyCustomers = new HashSet<Customer>();
+        ISet<Order> dirtyOrders = new HashSet<Order>();
 
         //binding sources
         CollectionViewSource customerViewSource;
@@ -70,35 +70,35 @@ namespace Client
             var customers = new ObservableCollection<Customer>(proxy.GetCustomers());
 
             //track changes
-            //Automatic change tracking is enabled by default when deserialising.
-            //This doesn't happen when working offline, and we need to track deletes manually anyway, so all tracking is done manually.
             foreach (var customer in customers) {
-                customer.StopTracking();
                 ((INotifyPropertyChanged)customer).PropertyChanged += (sender, e) => PropertyChanged(dirtyCustomers, (Customer)sender, e);
-
                 customer.Orders.CollectionChanged += (sender, e) => CollectionChanged(dirtyOrders, e);
-                foreach (var order in customer.Orders) {
-                    order.StopTracking();
+
+                foreach (var order in customer.Orders)
                     ((INotifyPropertyChanged)order).PropertyChanged += (sender, e) => PropertyChanged(dirtyOrders, (Order)sender, e);
-                }
             }
 
             customers.CollectionChanged += (sender, e) => CollectionChanged(dirtyCustomers, e);
             customerViewSource.Source = customers;
         }
 
-        static void CollectionChanged<T>(IList<T> dirty, NotifyCollectionChangedEventArgs e) where T : IObjectWithChangeTracker
+        static void CollectionChanged<T>(ISet<T> dirty, NotifyCollectionChangedEventArgs e) where T : IObjectWithChangeTracker
         {
             if (e.Action == NotifyCollectionChangedAction.Remove || e.Action == NotifyCollectionChangedAction.Replace)
-                foreach (var item in e.OldItems)
-                    dirty.Add(((T)item).MarkAsDeleted());
+                foreach (var item in e.OldItems) {
+                    T entity = (T)item;
+                    if (entity.ChangeTracker.State == ObjectState.Added)
+                        dirty.Remove(entity);
+                    else
+                        dirty.Add(entity.MarkAsDeleted());
+                }
 
             if (e.Action == NotifyCollectionChangedAction.Add || e.Action == NotifyCollectionChangedAction.Replace)
                 foreach (var item in e.NewItems)
                     dirty.Add(((T)item).MarkAsAdded());
         }
 
-        static void PropertyChanged<T>(IList<T> dirty, T item, PropertyChangedEventArgs e) where T : IObjectWithChangeTracker
+        static void PropertyChanged<T>(ISet<T> dirty, T item, PropertyChangedEventArgs e) where T : IObjectWithChangeTracker
         {
             if (item.ChangeTracker.State == ObjectState.Unchanged)
                 dirty.Add(item.MarkAsModified());

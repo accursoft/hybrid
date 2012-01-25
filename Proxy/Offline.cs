@@ -15,7 +15,7 @@ namespace Proxy
 
         public int SaveChanges(IEnumerable<Customer> customers, IEnumerable<Order> orders)
         {
-            return repository.SaveChanges(customers, orders);
+            return repository.SaveChanges(customers, orders, false);
         }
     }
 }

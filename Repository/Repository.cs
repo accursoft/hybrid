@@ -20,16 +20,22 @@ namespace Repository
                 return entities.Customers.Include("Orders").ToList();
         }
 
-        public int SaveChanges(IEnumerable<Customer> customers, IEnumerable<Order> orders)
+        //If the entities have been deserialised, automatically deleting a customer with orders will confuse the EF
+        public int SaveChanges(IEnumerable<Customer> customers, IEnumerable<Order> orders, bool deserialised)
         {
             using (var entities = new Entities(connection)) {
-                
+
                 foreach (var customer in customers)
-                    entities.Customers.ApplyChanges(customer);
+                    if (deserialised && customer.ChangeTracker.State == ObjectState.Deleted) {
+                        entities.Customers.Attach(customer);
+                        entities.Customers.DeleteObject(customer);
+                    }
+                    else
+                        entities.Customers.ApplyChanges(customer);
 
                 foreach (var order in orders)
                     entities.Orders.ApplyChanges(order);
-                
+
                 return entities.SaveChanges();
             }
         }
