@@ -2,10 +2,11 @@
 using System.Linq;
 
 using Model;
+using Repository;
 
 namespace Proxy
 {
-    public class Online : IProxy
+    public class Online : IRepositoryService
     {
         public IEnumerable<Customer> GetCustomers()
         {

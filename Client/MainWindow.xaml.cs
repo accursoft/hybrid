@@ -8,15 +8,16 @@ using System.Windows.Controls;
 using System.Windows.Data;
 
 using Model;
-using SyncClient;
 using Proxy;
+using Repository;
+using SyncClient;
 
 namespace Client
 {
     public partial class MainWindow : Window
     {
         //entities
-        IProxy proxy = new Online();
+        IRepositoryService proxy = new Online();
         ISet<Customer> dirtyCustomers = new HashSet<Customer>();
         ISet<Order> dirtyOrders = new HashSet<Order>();
 

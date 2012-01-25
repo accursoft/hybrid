@@ -1,10 +1,11 @@
 ﻿using System.Collections.Generic;
 
+using Repository;
 using Model;
 
 namespace Proxy
 {
-    public class Offline : IProxy
+    public class Offline : IRepositoryService
     {
         Repository.Repository repository = new Repository.Repository("name=LocalData");
 
