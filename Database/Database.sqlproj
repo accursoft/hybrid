@@ -112,6 +112,7 @@
     <Folder Include="Schema Objects\" />
     <Folder Include="Schema Objects\Tables\" />
     <Folder Include="Schema Objects\Tables\Keys\" />
+    <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
     <BuildContributorArgument Include="OutDir=$(OutDir)" />
@@ -137,5 +138,8 @@
   <ItemGroup>
     <None Include="Server.publish.xml" />
     <None Include="Sync.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <PostDeploy Include="Scripts\PostDeployment.sql" />
   </ItemGroup>
 </Project>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="g/7GaEWGlNqckBHxSUYLjmsL4mU=">
+<SavedWcfConfigurationInformation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Version="9.1" CheckSum="UxExMCMB152tqPhAs3k9eJMbW34=">
   <bindingConfigurations>
     <bindingConfiguration bindingType="netTcpBinding" name="NetTcpBinding_IRepository">
       <properties>
@@ -118,10 +118,10 @@
     </bindingConfiguration>
   </bindingConfigurations>
   <endpoints>
-    <endpoint name="NetTcpBinding_IRepository" contract="RepositoryService.IRepository" bindingType="netTcpBinding" address="net.tcp://localhost:8080/RepositoryService" bindingConfiguration="NetTcpBinding_IRepository">
+    <endpoint name="NetTcpBinding_IRepository" contract="RepositoryService.IRepository" bindingType="netTcpBinding" address="net.tcp://localhost/Repository" bindingConfiguration="NetTcpBinding_IRepository">
       <properties>
         <property path="/address" isComplexType="false" isExplicitlyDefined="true" clrType="System.Uri, System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-          <serializedValue>net.tcp://localhost:8080/RepositoryService</serializedValue>
+          <serializedValue>net.tcp://localhost/Repository</serializedValue>
         </property>
         <property path="/behaviorConfiguration" isComplexType="false" isExplicitlyDefined="false" clrType="System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
           <serializedValue />

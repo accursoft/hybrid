@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="Server" Class="IdRangesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="AppSettings" ConnectionString="Data Source=(local)\SQLFULL;Initial Catalog=Server;Integrated Security=True" SettingsObjectName="SyncService.Properties.Settings" SettingsPropertyName="Server" Provider="System.Data.SqlClient" />
+  <Connection Mode="AppSettings" ConnectionString="Data Source=(local)\SQLFULL;Initial Catalog=Server;Integrated Security=True" SettingsObjectName="Services.Properties.Settings" SettingsPropertyName="Server" Provider="System.Data.SqlClient" />
   <Table Name="dbo.IdRanges" Member="IdRanges">
     <Type Name="IdRange">
       <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />

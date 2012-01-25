@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SyncService
+namespace Services
 {
     using System.Data.Linq;
     using System.Data.Linq.Mapping;
@@ -36,7 +36,7 @@ namespace SyncService
     #endregion
         
         public IdRangesDataContext() : 
-                base(global::SyncService.Properties.Settings.Default.Server, mappingSource)
+                base(global::Services.Properties.Settings.Default.Server, mappingSource)
         {
             OnCreated();
         }

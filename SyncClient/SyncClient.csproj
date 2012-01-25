@@ -145,39 +145,44 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Properties\DataSources\Microsoft.Synchronization.ChangeBatch.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Synchronization.Data.DbSyncScopeDescription.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Synchronization.SyncIdFormatGroup.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Synchronization.SyncKnowledge.datasource" />
+    <None Include="Properties\DataSources\Microsoft.Synchronization.SyncSessionStatistics.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Service References\SyncService\Arrays1.xsd">
+    <None Include="Service References\SyncService\Arrays.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SyncService\Microsoft.Synchronization.Data1.xsd">
+    <None Include="Service References\SyncService\Microsoft.Synchronization.Data.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SyncService\Microsoft.Synchronization1.xsd">
+    <None Include="Service References\SyncService\Microsoft.Synchronization.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SyncService\service1.wsdl" />
-    <None Include="Service References\SyncService\service4.xsd">
+    <None Include="Service References\SyncService\service.wsdl" />
+    <None Include="Service References\SyncService\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SyncService\service41.xsd">
+    <None Include="Service References\SyncService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SyncService\service42.xsd">
+    <None Include="Service References\SyncService\service2.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SyncService\service43.xsd">
+    <None Include="Service References\SyncService\service3.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Service References\SyncService\Services.xsd">
       <SubType>Designer</SubType>
     </None>
     <None Include="Service References\SyncService\SyncClient.SyncService.Range.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
-    <None Include="Service References\SyncService\SyncService1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SyncService\System.Data1.xsd">
+    <None Include="Service References\SyncService\System.Data.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>
@@ -203,6 +208,12 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Repository\Repository.csproj">
+      <Project>{93EBB4B3-8ACA-4703-841C-2813F796B1FC}</Project>
+      <Name>Repository</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

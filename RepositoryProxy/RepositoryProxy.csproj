@@ -52,14 +52,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Service References\RepositoryService\Model1.xsd">
+    <None Include="Properties\DataSources\Model.Customer.datasource" />
+    <None Include="Service References\RepositoryService\Model.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\RepositoryService\service1.wsdl" />
-    <None Include="Service References\RepositoryService\service2.xsd">
+    <None Include="Service References\RepositoryService\service.wsdl" />
+    <None Include="Service References\RepositoryService\service.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\RepositoryService\service21.xsd">
+    <None Include="Service References\RepositoryService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
   </ItemGroup>

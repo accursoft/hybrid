@@ -18,19 +18,19 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="net.tcp://localhost/SyncService/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="net.tcp://localhost/Sync/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="46402e33-f7a7-4c0b-9463-2c2dfa0cc5c5" SourceId="1" SourceUrl="net.tcp://localhost/SyncService/mex" />
-    <MetadataFile FileName="service4.xsd" MetadataType="Schema" ID="1c9ad65c-08ea-44be-9a78-7181eb1a6ada" SourceId="1" SourceUrl="net.tcp://localhost/SyncService/mex" />
-    <MetadataFile FileName="Microsoft.Synchronization1.xsd" MetadataType="Schema" ID="2883638a-020e-476c-8d09-1218d6553b19" SourceId="1" SourceUrl="net.tcp://localhost/SyncService/mex" />
-    <MetadataFile FileName="service41.xsd" MetadataType="Schema" ID="b9cea309-4171-4154-826f-8c07d8a16df0" SourceId="1" SourceUrl="net.tcp://localhost/SyncService/mex" />
-    <MetadataFile FileName="Microsoft.Synchronization.Data1.xsd" MetadataType="Schema" ID="53015930-6cdc-4d24-b016-3a7633c3bc65" SourceId="1" SourceUrl="net.tcp://localhost/SyncService/mex" />
-    <MetadataFile FileName="service42.xsd" MetadataType="Schema" ID="721f076a-09f4-4ded-9f3f-31d76336f416" SourceId="1" SourceUrl="net.tcp://localhost/SyncService/mex" />
-    <MetadataFile FileName="System.Data1.xsd" MetadataType="Schema" ID="96729f63-3636-4b45-8cfd-6503c7caf244" SourceId="1" SourceUrl="net.tcp://localhost/SyncService/mex" />
-    <MetadataFile FileName="service43.xsd" MetadataType="Schema" ID="6f27a0d1-0742-4f15-b163-03afbb511831" SourceId="1" SourceUrl="net.tcp://localhost/SyncService/mex" />
-    <MetadataFile FileName="Arrays1.xsd" MetadataType="Schema" ID="ffee0c77-70be-450b-bbbf-6a858eb977e7" SourceId="1" SourceUrl="net.tcp://localhost/SyncService/mex" />
-    <MetadataFile FileName="SyncService1.xsd" MetadataType="Schema" ID="aba876a1-dbf0-4a06-b9b0-c2066f222a2b" SourceId="1" SourceUrl="net.tcp://localhost/SyncService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="d2bdc1ac-6df2-4171-9763-1c2dd9c09189" SourceId="1" SourceUrl="net.tcp://localhost/Sync/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="f6670a60-87ba-4029-bfc0-85cd5d691f8d" SourceId="1" SourceUrl="net.tcp://localhost/Sync/mex" />
+    <MetadataFile FileName="Microsoft.Synchronization.xsd" MetadataType="Schema" ID="96af738b-735c-4150-b451-3f0c97b9320b" SourceId="1" SourceUrl="net.tcp://localhost/Sync/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="b996437d-21ab-47db-b2ee-8487056a0d5b" SourceId="1" SourceUrl="net.tcp://localhost/Sync/mex" />
+    <MetadataFile FileName="Microsoft.Synchronization.Data.xsd" MetadataType="Schema" ID="290d8a19-0302-408e-9737-076c033fc7e3" SourceId="1" SourceUrl="net.tcp://localhost/Sync/mex" />
+    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="e9e03c88-f3df-4418-ba1d-1f3750d34541" SourceId="1" SourceUrl="net.tcp://localhost/Sync/mex" />
+    <MetadataFile FileName="System.Data.xsd" MetadataType="Schema" ID="1d1454d9-8757-415c-9e5c-4f2ad0b45bc8" SourceId="1" SourceUrl="net.tcp://localhost/Sync/mex" />
+    <MetadataFile FileName="service3.xsd" MetadataType="Schema" ID="d4735cf7-e660-4d89-9fb0-b3d254c18e71" SourceId="1" SourceUrl="net.tcp://localhost/Sync/mex" />
+    <MetadataFile FileName="Arrays.xsd" MetadataType="Schema" ID="6f541512-aefa-4a18-b35f-d7ff4c3f4886" SourceId="1" SourceUrl="net.tcp://localhost/Sync/mex" />
+    <MetadataFile FileName="Services.xsd" MetadataType="Schema" ID="47b3f090-e7ac-4624-ab47-e49f19962d1b" SourceId="1" SourceUrl="net.tcp://localhost/Sync/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

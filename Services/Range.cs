@@ -1,4 +1,4 @@
-﻿namespace SyncService
+﻿namespace Services
 {
     public struct Range
     {

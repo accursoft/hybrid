@@ -64,9 +64,9 @@
   </wsdl:binding>
   <wsdl:service name="RepositoryService">
     <wsdl:port name="NetTcpBinding_IRepository" binding="tns:NetTcpBinding_IRepository">
-      <soap12:address location="net.tcp://localhost:8080/RepositoryService" />
+      <soap12:address location="net.tcp://localhost/Repository" />
       <wsa10:EndpointReference>
-        <wsa10:Address>net.tcp://localhost:8080/RepositoryService</wsa10:Address>
+        <wsa10:Address>net.tcp://localhost/Repository</wsa10:Address>
       </wsa10:EndpointReference>
     </wsdl:port>
   </wsdl:service>

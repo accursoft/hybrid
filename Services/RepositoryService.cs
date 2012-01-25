@@ -3,7 +3,7 @@
 using Model;
 using Repository;
 
-namespace RepositoryService
+namespace Services
 {
     public class RepositoryService : IRepository
     {

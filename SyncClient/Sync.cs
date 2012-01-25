@@ -14,7 +14,7 @@ namespace SyncClient
             using (var local = new SqlConnection(Settings.Default.Local)) {
 
                 local.Open();
-                
+
                 using (var proxy = new SyncProxy(Settings.Default.Scope)) {
 
                     //provision if needed
@@ -29,24 +29,18 @@ namespace SyncClient
                     }.Synchronize();
                 }
 
-                //reseed the client
-                using (var reseed = new SqlCommand(Settings.Default.ReseedID, local)) {
-                    if (Settings.Default.MaxID == 0) GetIdRange();
-
-                    reseed.Parameters.AddWithValue("min", Settings.Default.MinID);
-                    reseed.Parameters.AddWithValue("max", Settings.Default.MaxID);
-                    reseed.ExecuteNonQuery();
+                //do we have an ID range?
+                if (Settings.Default.MaxID == 0) {
+                    using (var client = new SyncServiceClient()) {
+                        var range = client.GetIdRange(Environment.MachineName);
+                        Settings.Default.MinID = range.Min;
+                        Settings.Default.MaxID = range.Max;
+                        Settings.Default.Save();
+                    }
                 }
-            }
-        }
 
-        static void GetIdRange()
-        {
-            using (var client = new SyncServiceClient()) {
-                var range = client.GetIdRange(Environment.MachineName);
-                Settings.Default.MinID = range.Min;
-                Settings.Default.MaxID = range.Max;
-                Settings.Default.Save();
+                //reseed the client
+                Repository.Repository.Reseed(Settings.Default.MinID, Settings.Default.MaxID, local);
             }
         }
 

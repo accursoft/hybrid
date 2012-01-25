@@ -11,13 +11,6 @@
     <Setting Name="MaxID" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="ReseedID" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">declare @ID int;
-select @ID = isnull(max(ID), @min) from Customers where ID between @min and @max;
-DBCC CHECKIDENT (Customers, RESEED, @ID);
-select @ID = isnull(max(ID), @min) from Orders where ID between @min and @max;
-DBCC CHECKIDENT (Orders, RESEED, @ID);</Value>
-    </Setting>
     <Setting Name="Local" Type="(Connection string)" Scope="Application">
       <DesignTimeValue Profile="(Default)">&lt;?xml version="1.0" encoding="utf-16"?&gt;
 &lt;SerializableConnectionString xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"&gt;

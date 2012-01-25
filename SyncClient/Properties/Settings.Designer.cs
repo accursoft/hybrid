@@ -58,19 +58,6 @@ namespace SyncClient.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute(@"declare @ID int;
-select @ID = isnull(max(ID), @min) from Customers where ID between @min and @max;
-DBCC CHECKIDENT (Customers, RESEED, @ID);
-select @ID = isnull(max(ID), @min) from Orders where ID between @min and @max;
-DBCC CHECKIDENT (Orders, RESEED, @ID);")]
-        public string ReseedID {
-            get {
-                return ((string)(this["ReseedID"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;AttachDbFilename=|DataDirectory|\\LocalData.mdf;Integrate" +
             "d Security=True;Connect Timeout=30;User Instance=True")]

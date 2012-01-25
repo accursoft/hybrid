@@ -1,11 +1,12 @@
-﻿﻿using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Linq;
 using Microsoft.Synchronization;
 using Microsoft.Synchronization.Data;
 using Microsoft.Synchronization.Data.SqlServer;
-using SyncService.Properties;
 
-namespace SyncService
+using Services.Properties;
+
+namespace Services
 {
     public class SyncService : ISyncService
     {
@@ -47,6 +48,9 @@ namespace SyncService
         {
             provider.Dispose();
             provider = null;
+            //reseed
+            using (var con = new SqlConnection(Settings.Default.Server))
+                Repository.Repository.Reseed(Settings.Default.MinId, Settings.Default.MaxId, con);
         }
 
         public Range GetIdRange(string machine)
@@ -55,7 +59,7 @@ namespace SyncService
             using (var context = new IdRangesDataContext()) {
                 if ((range = context.IdRanges.SingleOrDefault(r => r.Machine == machine)) == null) {
                     range = new IdRange() { Machine = machine };
-                    range.Min = (context.IdRanges.Max(r => (int?) r.Max) ?? Settings.Default.StartId - 1) + 1;
+                    range.Min = context.IdRanges.Max(r => r.Max) + 1;
                     range.Max = range.Min + Settings.Default.IdRange - 1;
                     context.IdRanges.InsertOnSubmit(range);
                     context.SubmitChanges();

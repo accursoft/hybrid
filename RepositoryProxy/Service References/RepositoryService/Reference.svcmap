@@ -18,13 +18,13 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="net.tcp://localhost:8080/RepositoryService/mex" Protocol="mex" SourceId="1" />
+    <MetadataSource Address="net.tcp://localhost/Repository/mex" Protocol="mex" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="service1.wsdl" MetadataType="Wsdl" ID="138b8991-7931-47fb-b92b-2fa76f203f5e" SourceId="1" SourceUrl="net.tcp://localhost:8080/RepositoryService/mex" />
-    <MetadataFile FileName="service2.xsd" MetadataType="Schema" ID="4d5787df-584f-4faf-8921-0735cdf87875" SourceId="1" SourceUrl="net.tcp://localhost:8080/RepositoryService/mex" />
-    <MetadataFile FileName="service21.xsd" MetadataType="Schema" ID="c8fef137-05f0-43be-884a-239ace95a92d" SourceId="1" SourceUrl="net.tcp://localhost:8080/RepositoryService/mex" />
-    <MetadataFile FileName="Model1.xsd" MetadataType="Schema" ID="3e440e71-8ee0-4bdd-837d-787c010d3272" SourceId="1" SourceUrl="net.tcp://localhost:8080/RepositoryService/mex" />
+    <MetadataFile FileName="service.wsdl" MetadataType="Wsdl" ID="2d8cbcd0-b899-4fd3-bd19-d41104bc197e" SourceId="1" SourceUrl="net.tcp://localhost/Repository/mex" />
+    <MetadataFile FileName="service.xsd" MetadataType="Schema" ID="b9027cda-e3e0-402a-b954-1b2aff47c36a" SourceId="1" SourceUrl="net.tcp://localhost/Repository/mex" />
+    <MetadataFile FileName="service1.xsd" MetadataType="Schema" ID="15a62698-d366-42a2-957b-d25a30041e2c" SourceId="1" SourceUrl="net.tcp://localhost/Repository/mex" />
+    <MetadataFile FileName="Model.xsd" MetadataType="Schema" ID="64f1d966-8b30-4937-838c-0216089b60a3" SourceId="1" SourceUrl="net.tcp://localhost/Repository/mex" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

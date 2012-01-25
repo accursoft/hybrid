@@ -2,7 +2,7 @@
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import namespace="http://schemas.datacontract.org/2004/07/Microsoft.Synchronization.Data" />
   <xs:import namespace="http://schemas.datacontract.org/2004/07/Microsoft.Synchronization" />
-  <xs:import namespace="http://schemas.datacontract.org/2004/07/SyncService" />
+  <xs:import namespace="http://schemas.datacontract.org/2004/07/Services" />
   <xs:element name="GetScopeDescription">
     <xs:complexType>
       <xs:sequence>
@@ -108,7 +108,7 @@
   <xs:element name="GetIdRangeResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/SyncService" minOccurs="0" name="GetIdRangeResult" type="q11:Range" />
+        <xs:element xmlns:q11="http://schemas.datacontract.org/2004/07/Services" minOccurs="0" name="GetIdRangeResult" type="q11:Range" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

@@ -2,7 +2,7 @@
 using Microsoft.Synchronization;
 using Microsoft.Synchronization.Data;
 
-namespace SyncService
+namespace Services
 {
     [ServiceContract(SessionMode = SessionMode.Required)]
     [ServiceKnownType(typeof(DbSyncContext))]
