@@ -52,7 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Properties\DataSources\Model.Customer.datasource" />
     <None Include="Service References\RepositoryService\Model1.xsd">
       <SubType>Designer</SubType>
     </None>
