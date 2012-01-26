@@ -18,15 +18,22 @@ namespace Client
 
         private void online_Click(object sender, RoutedEventArgs e)
         {
+            var main = new MainWindow(true);
+
             if (!Settings.Default.Online) {
                 Synchronising.Visibility = Visibility.Visible;
                 Dispatcher.Invoke(DispatcherPriority.Background, new Action(Sync.Synchronize));
                 Synchronising.Visibility = Visibility.Hidden;
             }
-            else
-                Task.Factory.StartNew(Sync.Synchronize);
+            else {
+                main.Synchronising = true;
+                Task.Factory.StartNew(delegate {
+                    Sync.Synchronize();
+                    main.Synchronising = false;
+                });
+            }
 
-            new MainWindow(true).ShowDialog();
+            main.ShowDialog();
             Settings.Default.Online = true;
             Settings.Default.Save();
         }

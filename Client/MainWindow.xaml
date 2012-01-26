@@ -31,6 +31,7 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Height="37" HorizontalAlignment="Left" Margin="26,12,0,0" Name="OnlineLbl" VerticalAlignment="Top" Width="198" FontSize="16" FontWeight="Bold" FontStyle="Italic" Foreground="Crimson" />
+        <Label Height="37" HorizontalAlignment="Left" Margin="26,12,0,0" Name="online" VerticalAlignment="Top" Width="198" FontSize="16" FontWeight="Bold" FontStyle="Italic" Foreground="Crimson" />
+        <Label FontSize="16" FontStyle="Italic" FontWeight="Bold" Foreground="DarkOliveGreen" Height="37" HorizontalAlignment="Left" Margin="271,12,0,0" Name="synchronising" VerticalAlignment="Top" Width="198" Content="Synchronising ..." Visibility="Hidden" />
     </Grid>
 </Window>

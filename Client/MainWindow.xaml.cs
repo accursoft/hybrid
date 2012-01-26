@@ -32,7 +32,15 @@ namespace Client
         public MainWindow(bool online) : this()
         {
             proxy = online ? (IRepository)new Online() : (IRepository)new Offline();
-            OnlineLbl.Content = online ? "Online" : "Offline";
+            this.online.Content = online ? "Online" : "Offline";
+        }
+
+        public bool Synchronising
+        {
+            set
+            {
+                Dispatcher.Invoke(new Action(delegate { synchronising.Visibility = value ? Visibility.Visible : Visibility.Hidden; }));
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
