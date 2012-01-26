@@ -3,8 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Sync Manager" Height="300" Width="300">
     <Grid>
-        <Button Content="Sync" Height="23" HorizontalAlignment="Left" Name="sync" VerticalAlignment="Top" Width="75" Click="Synchronize" Margin="92,54,0,0" />
-        <Button Content="Start Online" Height="23" HorizontalAlignment="Left" Name="online" VerticalAlignment="Top" Width="75" Click="online_Click" Margin="92,115,0,0" />
-        <Button Content="Start Offline" Height="23" HorizontalAlignment="Left" Name="offline" VerticalAlignment="Top" Width="75" Click="offline_Click" Margin="92,176,0,0" />
+        <Button Content="Start Online" Height="23" HorizontalAlignment="Left" Name="online" VerticalAlignment="Top" Width="75" Click="online_Click" Margin="93,25,0,0" />
+        <Button Content="Start Offline" Height="23" HorizontalAlignment="Left" Name="offline" VerticalAlignment="Top" Width="75" Click="offline_Click" Margin="93,86,0,0" />
+        <Label Height="49" HorizontalAlignment="Left" Margin="45,168,0,0" Name="Synchronising" VerticalAlignment="Top" Width="191" FontSize="24" FontWeight="Bold" Foreground="DarkOliveGreen" Content="Synchronising ..." FontStyle="Italic" Visibility="Hidden" />
     </Grid>
 </Window>

@@ -5,20 +5,20 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:my1="clr-namespace:Model;assembly=Model"
         mc:Ignorable="d"
-        Title="MainWindow" Height="350" Width="650"
+        Title="MainWindow" Height="306" Width="514"
         Loaded="Window_Loaded" Closed="Window_Closed">
     <Window.Resources>
         <CollectionViewSource x:Key="customerViewSource" d:DesignSource="{d:DesignInstance my1:Customer, CreateList=True}" />
         <CollectionViewSource x:Key="customerOrdersViewSource" Source="{Binding Path=Orders, Source={StaticResource customerViewSource}}" />
     </Window.Resources>
     <Grid DataContext="{StaticResource customerViewSource}">
-        <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="26,86,0,0" Name="customerDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="198">
+        <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding}" Margin="26,55,0,0" Name="customerDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="198">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Path=Name}" Header="Name" />
                 <DataGridTextColumn x:Name="regionColumn" Binding="{Binding Path=Region}" Header="Region" />
             </DataGrid.Columns>
         </DataGrid>
-        <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource customerOrdersViewSource}}" Margin="256,86,0,0" Name="ordersDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="336" InitializingNewItem="ordersDataGrid_InitializingNewItem">
+        <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding Source={StaticResource customerOrdersViewSource}}" Margin="246,55,0,0" Name="ordersDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="336" InitializingNewItem="ordersDataGrid_InitializingNewItem">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="itemColumn" Binding="{Binding Path=Item}" Header="Item" />
                 <DataGridTextColumn x:Name="costColumn" Binding="{Binding Path=Cost}" Header="Cost" />
@@ -31,5 +31,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
+        <Label Height="37" HorizontalAlignment="Left" Margin="26,12,0,0" Name="OnlineLbl" VerticalAlignment="Top" Width="198" FontSize="16" FontWeight="Bold" FontStyle="Italic" Foreground="Crimson" />
     </Grid>
 </Window>

@@ -32,6 +32,7 @@ namespace Client
         public MainWindow(bool online) : this()
         {
             proxy = online ? (IRepository)new Online() : (IRepository)new Offline();
+            OnlineLbl.Content = online ? "Online" : "Offline";
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
