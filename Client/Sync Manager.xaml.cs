@@ -26,10 +26,10 @@ namespace Client
                 Synchronising.Visibility = Visibility.Hidden;
             }
             else {
-                main.Synchronising = true;
+                main.Synchronising(true);
                 Task.Factory.StartNew(delegate {
                     Sync.Synchronize();
-                    main.Synchronising = false;
+                    main.Synchronising(false);
                 });
             }
 
