@@ -5,6 +5,7 @@
     <Grid>
         <Button Content="Start Online" Height="23" HorizontalAlignment="Left" Name="online" VerticalAlignment="Top" Width="75" Click="online_Click" Margin="93,25,0,0" />
         <Button Content="Start Offline" Height="23" HorizontalAlignment="Left" Name="offline" VerticalAlignment="Top" Width="75" Click="offline_Click" Margin="93,86,0,0" />
-        <Label Height="49" HorizontalAlignment="Left" Margin="45,168,0,0" Name="Synchronising" VerticalAlignment="Top" Width="191" FontSize="24" FontWeight="Bold" Foreground="DarkOliveGreen" Content="Synchronising ..." FontStyle="Italic" Visibility="Hidden" />
+        <Label Height="49" HorizontalAlignment="Left" Margin="40,190,0,0" Name="Synchronising" VerticalAlignment="Top" Width="191" FontSize="24" FontWeight="Bold" Foreground="DarkOliveGreen" Content="Synchronising ..." FontStyle="Italic" Visibility="Hidden" />
+        <Button Content="Synchronise" Height="23" HorizontalAlignment="Left" Margin="92,149,0,0" Name="synchronise" VerticalAlignment="Top" Width="75" Click="synchronise_Click" />
     </Grid>
 </Window>

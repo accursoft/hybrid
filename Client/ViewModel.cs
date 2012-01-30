@@ -36,21 +36,11 @@ namespace Client
                 }
 
                 Customers.CollectionChanged += (s, a) => CollectionChanged(dirtyCustomers, a);
-
-                RaisePropertyChanged("Online");
-                RaisePropertyChanged("Customers");
             }
             get { return online; }
         }
 
-        bool synchronising;
-        public bool Synchronising {
-            get { return synchronising; }
-            set { 
-                synchronising = value;
-                RaisePropertyChanged("Synchronising");
-            }
-        }
+        public bool Synchronising { get; set; }
 
         static void CollectionChanged<T>(ISet<T> dirty, NotifyCollectionChangedEventArgs e) where T : IObjectWithChangeTracker
         {
@@ -87,11 +77,7 @@ namespace Client
             dirtyOrders.Clear();
         }
 
+        #pragma warning disable 0067 // "The event 'PropertyChanged' is never used"
         public event PropertyChangedEventHandler PropertyChanged;
-        protected void RaisePropertyChanged(string property)
-        {
-            if (PropertyChanged != null)
-                PropertyChanged(this, new PropertyChangedEventArgs(property));
-        }
     }
 }
