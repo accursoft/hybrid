@@ -13,8 +13,8 @@ namespace Client
     class ViewModel : INotifyPropertyChanged
     {
         IRepository proxy;
-        ISet<Customer> dirtyCustomers = new HashSet<Customer>();
-        ISet<Order> dirtyOrders = new HashSet<Order>();
+        ISet<Customer> dirtyCustomers;
+        ISet<Order> dirtyOrders;
         public ObservableCollection<Customer> Customers { get; private set; }
 
         bool online;
@@ -25,6 +25,8 @@ namespace Client
                 proxy = (online = value) ? (IRepository)new Online() : (IRepository)new Offline();
 
                 Customers = new ObservableCollection<Customer>(proxy.GetCustomers());
+                dirtyCustomers = new HashSet<Customer>();
+                dirtyOrders = new HashSet<Order>();
 
                 //track changes
                 foreach (var customer in Customers) {
@@ -39,8 +41,6 @@ namespace Client
             }
             get { return online; }
         }
-
-        public bool Synchronising { get; set; }
 
         static void CollectionChanged<T>(ISet<T> dirty, NotifyCollectionChangedEventArgs e) where T : IObjectWithChangeTracker
         {
@@ -71,6 +71,8 @@ namespace Client
 
         public void Save()
         {
+            if (proxy == null) throw new InvalidOperationException("The Online property must be set before saving");
+
             proxy.SaveChanges(dirtyCustomers, dirtyOrders);
 
             dirtyCustomers.Clear();

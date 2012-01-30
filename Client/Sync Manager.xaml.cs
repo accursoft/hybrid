@@ -16,33 +16,27 @@ namespace Client
             InitializeComponent();
         }
 
-        void online_Click(object sender, RoutedEventArgs e)
+        private void online_Click(object sender, RoutedEventArgs e)
         {
-            var main = new MainWindow(true);
+            //synchronise if the last run was offline
+            if (!Settings.Default.Online) Synchronise();
+            new MainWindow(true).ShowDialog();
 
-            if (!Settings.Default.Online)
-                Synchronise();
-            else {
-                main.Synchronising(true);
-                Task.Factory.StartNew(delegate {
-                    Sync.Synchronize();
-                    main.Synchronising(false);
-                });
-            }
+            //synchronise if offline worker
+            if (Settings.Default.OfflineWorker) Synchronise();
 
-            main.ShowDialog();
-            Synchronise();
             Settings.Default.Online = true;
             Settings.Default.Save();
         }
 
-        void offline_Click(object sender, RoutedEventArgs e)
+        private void offline_Click(object sender, RoutedEventArgs e)
         {
             if (!Sync.IsProvisioned()) {
                 MessageBox.Show("The database has not been provisioned yet.\nPlease synchronise.", "Offline database not provisioned", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
             new MainWindow(false).ShowDialog();
+
             Settings.Default.Online = false;
             Settings.Default.Save();
         }
@@ -54,7 +48,7 @@ namespace Client
             Synchronising.Visibility = Visibility.Hidden;
         }
 
-        void synchronise_Click(object sender, RoutedEventArgs e)
+        private void synchronise_Click(object sender, RoutedEventArgs e)
         {
             Synchronise();
         }

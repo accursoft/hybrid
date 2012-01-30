@@ -8,7 +8,6 @@
     <Window.Resources>
         <vm:ViewModel x:Key="vm" />
         <vm:OnlineConverter x:Key="OnlineConverter" />
-        <BooleanToVisibilityConverter x:Key="SynchronisingConverter" />
     </Window.Resources>
     <Grid DataContext="{StaticResource vm}">
         <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding Customers}" Margin="26,55,0,0" Name="customerDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="198">
@@ -31,6 +30,5 @@
             </DataGrid.Columns>
         </DataGrid>
         <Label Height="37" HorizontalAlignment="Left" Margin="26,12,0,0" Name="online" VerticalAlignment="Top" Width="198" FontSize="16" FontWeight="Bold" FontStyle="Italic" Foreground="Crimson" Content="{Binding Path=Online, Converter={StaticResource OnlineConverter}}" />
-        <Label FontSize="16" FontStyle="Italic" FontWeight="Bold" Foreground="DarkOliveGreen" Height="37" HorizontalAlignment="Left" Margin="271,12,0,0" Name="synchronising" VerticalAlignment="Top" Width="198" Content="Synchronising ..." Visibility="{Binding Path=Synchronising, Converter={StaticResource SynchronisingConverter}}" />
     </Grid>
 </Window>

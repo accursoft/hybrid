@@ -110,7 +110,6 @@
       <SubType>Designer</SubType>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="Properties\DataSources\Model.Customer.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

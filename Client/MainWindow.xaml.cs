@@ -29,10 +29,5 @@ namespace Client
         {
             vm.Save();
         }
-
-        public void Synchronising(bool synchronising)
-        {
-            vm.Synchronising = synchronising;
-        }
     }
 }
