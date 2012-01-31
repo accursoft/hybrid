@@ -6,10 +6,10 @@
         Title="MainWindow" Height="306" Width="514"
         Closed="Window_Closed">
     <Window.Resources>
-        <vm:ViewModel x:Key="vm" />
+        <vm:ViewModelLocator x:Key="locator" />
         <vm:OnlineConverter x:Key="OnlineConverter" />
     </Window.Resources>
-    <Grid DataContext="{StaticResource vm}">
+    <Grid DataContext="{Binding Source={StaticResource locator}, Path=ViewModel}" Name="container">
         <DataGrid AutoGenerateColumns="False" EnableRowVirtualization="True" Height="200" HorizontalAlignment="Left" ItemsSource="{Binding Customers}" Margin="26,55,0,0" Name="customerDataGrid" RowDetailsVisibilityMode="VisibleWhenSelected" VerticalAlignment="Top" Width="198">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="nameColumn" Binding="{Binding Path=Name}" Header="Name" />
@@ -29,6 +29,6 @@
                 </DataGridTemplateColumn>
             </DataGrid.Columns>
         </DataGrid>
-        <Label Height="37" HorizontalAlignment="Left" Margin="26,12,0,0" Name="online" VerticalAlignment="Top" Width="198" FontSize="16" FontWeight="Bold" FontStyle="Italic" Foreground="Crimson" Content="{Binding Path=Online, Converter={StaticResource OnlineConverter}}" />
+        <TextBlock Height="37" HorizontalAlignment="Left" Margin="26,12,0,0" Name="online" VerticalAlignment="Top" Width="198" FontSize="16" FontWeight="Bold" FontStyle="Italic" Foreground="Crimson" Text="{Binding Path=Online, Converter={StaticResource OnlineConverter}}" />
     </Grid>
 </Window>

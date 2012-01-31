@@ -2,11 +2,10 @@
 using System.Linq;
 
 using Model;
-using Repository;
 
 namespace RepositoryProxy
 {
-    public class Online : IRepository
+    public class OnlineProxy : IRepositoryProxy
     {
         public IEnumerable<Customer> GetCustomers()
         {
@@ -31,6 +30,11 @@ namespace RepositoryProxy
         {
             using (var repositoryService = new RepositoryService.RepositoryClient())
                 return repositoryService.SaveChanges(customers.ToArray(), orders.ToArray());
+        }
+
+        public bool Online
+        {
+            get { return true; }
         }
     }
 }

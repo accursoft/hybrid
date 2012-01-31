@@ -38,8 +38,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Offline.cs" />
-    <Compile Include="Online.cs" />
+    <Compile Include="IRepositoryProxy.cs" />
+    <Compile Include="OfflineProxy.cs" />
+    <Compile Include="OnlineProxy.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\RepositoryService\Reference.cs">
       <AutoGen>True</AutoGen>

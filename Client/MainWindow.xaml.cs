@@ -7,17 +7,9 @@ namespace Client
 {
     public partial class MainWindow : Window
     {
-        ViewModel vm;
-
-        private MainWindow()
+        public MainWindow()
         {
             InitializeComponent();
-            vm = (ViewModel)FindResource("vm");
-        }
-
-        public MainWindow(bool online) : this()
-        {
-            vm.Online = online;
         }
 
         private void ordersDataGrid_InitializingNewItem(object sender, InitializingNewItemEventArgs e)
@@ -27,7 +19,7 @@ namespace Client
 
         private void Window_Closed(object sender, System.EventArgs e)
         {
-            vm.Save();
+            ((ViewModel)container.DataContext).Save();
         }
     }
 }

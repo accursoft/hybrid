@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Threading;
 
-using Client.Properties;
-
 using SyncClient;
+
+using Client.Properties;
 
 namespace Client
 {
@@ -14,31 +13,23 @@ namespace Client
         public SyncManager()
         {
             InitializeComponent();
+            Settings.Default.SettingChanging += (sender, e)  => Settings.Default.Save();
         }
 
-        private void online_Click(object sender, RoutedEventArgs e)
+        private void start_Click(object sender, RoutedEventArgs e)
         {
-            //synchronise if the last run was offline
-            if (!Settings.Default.Online) Synchronise();
-            new MainWindow(true).ShowDialog();
-
-            //synchronise if offline worker
-            if (Settings.Default.OfflineWorker) Synchronise();
-
-            Settings.Default.Online = true;
-            Settings.Default.Save();
-        }
-
-        private void offline_Click(object sender, RoutedEventArgs e)
-        {
-            if (!Sync.IsProvisioned()) {
-                MessageBox.Show("The database has not been provisioned yet.\nPlease synchronise.", "Offline database not provisioned", MessageBoxButton.OK, MessageBoxImage.Error);
-                return;
+            if (Settings.Default.StartOnline) {
+                if (!Settings.Default.LastRunOnline) Synchronise();
+                new MainWindow().ShowDialog();
+                if (Settings.Default.SyncAfterClose) Synchronise();
+                Settings.Default.LastRunOnline = true;
             }
-            new MainWindow(false).ShowDialog();
-
-            Settings.Default.Online = false;
-            Settings.Default.Save();
+            else if (!Sync.IsProvisioned())
+                MessageBox.Show("The database has not been provisioned yet.\nPlease synchronise.", "Offline database not provisioned", MessageBoxButton.OK, MessageBoxImage.Error);
+            else {
+                new MainWindow().ShowDialog();
+                Settings.Default.LastRunOnline = false;
+            }
         }
 
         void Synchronise()

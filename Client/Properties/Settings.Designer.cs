@@ -26,21 +26,36 @@ namespace Client.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool Online {
+        public bool LastRunOnline {
             get {
-                return ((bool)(this["Online"]));
+                return ((bool)(this["LastRunOnline"]));
             }
             set {
-                this["Online"] = value;
+                this["LastRunOnline"] = value;
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool OfflineWorker {
+        public bool SyncAfterClose {
             get {
-                return ((bool)(this["OfflineWorker"]));
+                return ((bool)(this["SyncAfterClose"]));
+            }
+            set {
+                this["SyncAfterClose"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool StartOnline {
+            get {
+                return ((bool)(this["StartOnline"]));
+            }
+            set {
+                this["StartOnline"] = value;
             }
         }
     }

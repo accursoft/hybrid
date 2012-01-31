@@ -5,41 +5,40 @@ using System.Collections.Specialized;
 using System.ComponentModel;
 
 using Model;
-using Repository;
 using RepositoryProxy;
 
 namespace Client
 {
     class ViewModel : INotifyPropertyChanged
     {
-        IRepository proxy;
+        IRepositoryProxy proxy;
         ISet<Customer> dirtyCustomers;
         ISet<Order> dirtyOrders;
         public ObservableCollection<Customer> Customers { get; private set; }
 
-        bool online;
+        public ViewModel(IRepositoryProxy proxy)
+        {
+            this.proxy = proxy;
+
+            Customers = new ObservableCollection<Customer>(proxy.GetCustomers());
+            dirtyCustomers = new HashSet<Customer>();
+            dirtyOrders = new HashSet<Order>();
+
+            //track changes
+            foreach (var customer in Customers) {
+                ((INotifyPropertyChanged)customer).PropertyChanged += (s, a) => EntityPropertyChanged(dirtyCustomers, (Customer)s, a);
+                customer.Orders.CollectionChanged += (s, a) => CollectionChanged(dirtyOrders, a);
+
+                foreach (var order in customer.Orders)
+                    ((INotifyPropertyChanged)order).PropertyChanged += (s, a) => EntityPropertyChanged(dirtyOrders, (Order)s, a);
+            }
+
+            Customers.CollectionChanged += (s, a) => CollectionChanged(dirtyCustomers, a);
+        }
+
         public bool Online
         {
-            set
-            {
-                proxy = (online = value) ? (IRepository)new Online() : (IRepository)new Offline();
-
-                Customers = new ObservableCollection<Customer>(proxy.GetCustomers());
-                dirtyCustomers = new HashSet<Customer>();
-                dirtyOrders = new HashSet<Order>();
-
-                //track changes
-                foreach (var customer in Customers) {
-                    ((INotifyPropertyChanged)customer).PropertyChanged += (s, a) => EntityPropertyChanged(dirtyCustomers, (Customer)s, a);
-                    customer.Orders.CollectionChanged += (s, a) => CollectionChanged(dirtyOrders, a);
-
-                    foreach (var order in customer.Orders)
-                        ((INotifyPropertyChanged)order).PropertyChanged += (s, a) => EntityPropertyChanged(dirtyOrders, (Order)s, a);
-                }
-
-                Customers.CollectionChanged += (s, a) => CollectionChanged(dirtyCustomers, a);
-            }
-            get { return online; }
+            get { return proxy.Online; }
         }
 
         static void CollectionChanged<T>(ISet<T> dirty, NotifyCollectionChangedEventArgs e) where T : IObjectWithChangeTracker
