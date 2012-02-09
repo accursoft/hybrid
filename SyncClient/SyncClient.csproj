@@ -145,11 +145,6 @@
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\DataSources\Microsoft.Synchronization.ChangeBatch.datasource" />
-    <None Include="Properties\DataSources\Microsoft.Synchronization.Data.DbSyncScopeDescription.datasource" />
-    <None Include="Properties\DataSources\Microsoft.Synchronization.SyncIdFormatGroup.datasource" />
-    <None Include="Properties\DataSources\Microsoft.Synchronization.SyncKnowledge.datasource" />
-    <None Include="Properties\DataSources\Microsoft.Synchronization.SyncSessionStatistics.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
