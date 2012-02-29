@@ -113,6 +113,7 @@
     <Folder Include="Schema Objects\Tables\" />
     <Folder Include="Schema Objects\Tables\Keys\" />
     <Folder Include="Scripts" />
+    <Folder Include="Schema Objects\Sync Hack" />
   </ItemGroup>
   <ItemGroup>
     <BuildContributorArgument Include="OutDir=$(OutDir)" />
@@ -134,12 +135,27 @@
       <SubType>Code</SubType>
     </Build>
     <Build Include="Schema Objects\Tables\IdRanges.sql" />
+    <Build Include="Schema Objects\Sync Hack\TableType.sql" />
+    <Build Include="Schema Objects\Sync Hack\BulkDelete.sql" />
+    <Build Include="Schema Objects\Sync Hack\BulkInsert.sql" />
+    <Build Include="Schema Objects\Sync Hack\BulkUpdate.sql" />
+    <Build Include="Schema Objects\Sync Hack\Delete.sql" />
+    <Build Include="Schema Objects\Sync Hack\DeleteMetadata.sql" />
+    <Build Include="Schema Objects\Sync Hack\Insert.sql" />
+    <Build Include="Schema Objects\Sync Hack\InsertMetadata.sql" />
+    <Build Include="Schema Objects\Sync Hack\SelectChanges.sql" />
+    <Build Include="Schema Objects\Sync Hack\SelectRow.sql" />
+    <Build Include="Schema Objects\Sync Hack\Update.sql" />
+    <Build Include="Schema Objects\Sync Hack\UpdateMetadata.sql" />
+    <Build Include="Schema Objects\Sync Hack\RefreshElements.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Server.publish.xml" />
     <None Include="Sync.config" />
+    <None Include="Sync Hacks.txt" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="Scripts\PostDeployment.sql" />
+    <PostDeploy Include="Scripts\Server ID Range.sql" />
+    <Build Include="Scripts\Sync Hack.sql" />
   </ItemGroup>
 </Project>
