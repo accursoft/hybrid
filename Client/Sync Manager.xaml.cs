@@ -13,7 +13,7 @@ namespace Client
         public SyncManager()
         {
             InitializeComponent();
-            Settings.Default.SettingChanging += (sender, e)  => Settings.Default.Save();
+            Settings.Default.PropertyChanged += (sender, e)  => Settings.Default.Save();
         }
 
         private void start_Click(object sender, RoutedEventArgs e)
