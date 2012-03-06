@@ -17,6 +17,11 @@ Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Sync Hacks", "Sync Hacks\Sy
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Server", "Server\Server.sqlproj", "{6029BF0D-0D52-4099-B4DF-4EAE1861B4FD}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CBFDB78C-D66D-4886-9176-B2330742E6AE}"
+    ProjectSection(SolutionItems) = preProject
+        Read Me.htm = Read Me.htm
+    EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
