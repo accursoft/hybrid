@@ -74,29 +74,23 @@ namespace SyncClient.SyncService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SyncService.ISyncService", SessionMode=System.ServiceModel.SessionMode.Required)]
-    public interface ISyncService {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SyncService.SyncService", SessionMode=System.ServiceModel.SessionMode.Required)]
+    public interface SyncService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/GetScopeDescription", ReplyAction="http://tempuri.org/ISyncService/GetScopeDescriptionResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SyncService/GetScopeDescription", ReplyAction="http://tempuri.org/SyncService/GetScopeDescriptionResponse")]
         Microsoft.Synchronization.Data.DbSyncScopeDescription GetScopeDescription(string scope);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/BeginSession", ReplyAction="http://tempuri.org/ISyncService/BeginSessionResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SyncService/BeginSession", ReplyAction="http://tempuri.org/SyncService/BeginSessionResponse")]
         void BeginSession(string scopeName, Microsoft.Synchronization.SyncIdFormatGroup idFormatGroup);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/GetIdFormats", ReplyAction="http://tempuri.org/ISyncService/GetIdFormatsResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SyncService/GetIdFormats", ReplyAction="http://tempuri.org/SyncService/GetIdFormatsResponse")]
         Microsoft.Synchronization.SyncIdFormatGroup GetIdFormats();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/GetKnowledge", ReplyAction="http://tempuri.org/ISyncService/GetKnowledgeResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SyncService/GetKnowledge", ReplyAction="http://tempuri.org/SyncService/GetKnowledgeResponse")]
         [return: System.ServiceModel.MessageParameterAttribute(Name="batchSize")]
         uint GetKnowledge(out Microsoft.Synchronization.SyncKnowledge knowledge);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/GetChanges", ReplyAction="http://tempuri.org/ISyncService/GetChangesResponse")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncIdFormatGroup))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ForgottenKnowledge))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncKnowledge))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ChangeBatch))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ConflictResolutionPolicy))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncSessionStatistics))]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SyncService/GetChanges", ReplyAction="http://tempuri.org/SyncService/GetChangesResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncContext))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncScopeProgress))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncTableProgress[]))]
@@ -108,18 +102,18 @@ namespace SyncClient.SyncService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncColumnDescription))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncForeignKeyConstraint[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncForeignKeyConstraint))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ForgottenKnowledge))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncKnowledge))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncIdFormatGroup))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ChangeBatch))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ConflictResolutionPolicy))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncSessionStatistics))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Data.Rule))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SyncClient.SyncService.Range))]
         Microsoft.Synchronization.ChangeBatch GetChanges(out object changeData, uint batchSize, Microsoft.Synchronization.SyncKnowledge destinationKnowledge);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/ApplyChanges", ReplyAction="http://tempuri.org/ISyncService/ApplyChangesResponse")]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncIdFormatGroup))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ForgottenKnowledge))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncKnowledge))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ChangeBatch))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ConflictResolutionPolicy))]
-        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncSessionStatistics))]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SyncService/ApplyChanges", ReplyAction="http://tempuri.org/SyncService/ApplyChangesResponse")]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncContext))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncScopeProgress))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncTableProgress[]))]
@@ -131,25 +125,31 @@ namespace SyncClient.SyncService {
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncColumnDescription))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncForeignKeyConstraint[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.Data.DbSyncForeignKeyConstraint))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ForgottenKnowledge))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncKnowledge))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncIdFormatGroup))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ChangeBatch))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.ConflictResolutionPolicy))]
+        [System.ServiceModel.ServiceKnownTypeAttribute(typeof(Microsoft.Synchronization.SyncSessionStatistics))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(System.Data.Rule))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(string[]))]
         [System.ServiceModel.ServiceKnownTypeAttribute(typeof(SyncClient.SyncService.Range))]
         void ApplyChanges(Microsoft.Synchronization.ConflictResolutionPolicy resolutionPolicy, Microsoft.Synchronization.ChangeBatch sourceChanges, object changeData, ref Microsoft.Synchronization.SyncSessionStatistics sessionStatistics);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/EndSession", ReplyAction="http://tempuri.org/ISyncService/EndSessionResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SyncService/EndSession", ReplyAction="http://tempuri.org/SyncService/EndSessionResponse")]
         void EndSession();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ISyncService/GetIdRange", ReplyAction="http://tempuri.org/ISyncService/GetIdRangeResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SyncService/GetIdRange", ReplyAction="http://tempuri.org/SyncService/GetIdRangeResponse")]
         SyncClient.SyncService.Range GetIdRange(string machine);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface ISyncServiceChannel : SyncClient.SyncService.ISyncService, System.ServiceModel.IClientChannel {
+    public interface SyncServiceChannel : SyncClient.SyncService.SyncService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class SyncServiceClient : System.ServiceModel.ClientBase<SyncClient.SyncService.ISyncService>, SyncClient.SyncService.ISyncService {
+    public partial class SyncServiceClient : System.ServiceModel.ClientBase<SyncClient.SyncService.SyncService>, SyncClient.SyncService.SyncService {
         
         public SyncServiceClient() {
         }

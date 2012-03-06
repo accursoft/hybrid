@@ -83,79 +83,39 @@
     <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
     <TargetDatabase>Server</TargetDatabase>
     <TreatTSqlWarningsAsErrors>False</TreatTSqlWarningsAsErrors>
-    <SuppressTSqlWarnings />
+    <SuppressTSqlWarnings>71502</SuppressTSqlWarnings>
     <SqlTargetName>Server</SqlTargetName>
     <RunSqlCodeAnalysis>False</RunSqlCodeAnalysis>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
-    <OutputPath>.\sql\release\</OutputPath>
-    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
-    <TargetDatabase>Server</TargetDatabase>
-    <TreatTSqlWarningsAsErrors>False</TreatTSqlWarningsAsErrors>
-    <SuppressTSqlWarnings />
-    <PlatformTarget>x86</PlatformTarget>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <OutputPath>.\sql\debug\</OutputPath>
-    <BuildScriptName>$(MSBuildProjectName).sql</BuildScriptName>
-    <TargetDatabase>Server</TargetDatabase>
-    <TreatTSqlWarningsAsErrors>False</TreatTSqlWarningsAsErrors>
-    <SuppressTSqlWarnings />
-    <SqlTargetName>Server</SqlTargetName>
-    <RunSqlCodeAnalysis>False</RunSqlCodeAnalysis>
-    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <!--Import the settings-->
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\VisualStudio\v$(VisualStudioVersion)\SSDT\Microsoft.Data.Tools.Schema.SqlTasks.targets" />
   <ItemGroup>
     <Folder Include="Properties\" />
-    <Folder Include="Schema Objects\" />
-    <Folder Include="Schema Objects\Tables\" />
-    <Folder Include="Schema Objects\Tables\Keys\" />
+    <Folder Include="Stored Procedures" />
     <Folder Include="Scripts" />
-    <Folder Include="Schema Objects\Sync Hack" />
   </ItemGroup>
   <ItemGroup>
     <BuildContributorArgument Include="OutDir=$(OutDir)" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="Schema Objects\Tables\Keys\FK_Orders_Customers.fkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Tables\Keys\PK_Customers_1.pkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Tables\Keys\PK_Orders_1.pkey.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Tables\Customers.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Tables\Orders.table.sql">
-      <SubType>Code</SubType>
-    </Build>
-    <Build Include="Schema Objects\Tables\IdRanges.sql" />
-    <Build Include="Schema Objects\Sync Hack\TableType.sql" />
-    <Build Include="Schema Objects\Sync Hack\BulkDelete.sql" />
-    <Build Include="Schema Objects\Sync Hack\BulkInsert.sql" />
-    <Build Include="Schema Objects\Sync Hack\BulkUpdate.sql" />
-    <Build Include="Schema Objects\Sync Hack\Delete.sql" />
-    <Build Include="Schema Objects\Sync Hack\DeleteMetadata.sql" />
-    <Build Include="Schema Objects\Sync Hack\Insert.sql" />
-    <Build Include="Schema Objects\Sync Hack\InsertMetadata.sql" />
-    <Build Include="Schema Objects\Sync Hack\SelectChanges.sql" />
-    <Build Include="Schema Objects\Sync Hack\SelectRow.sql" />
-    <Build Include="Schema Objects\Sync Hack\Update.sql" />
-    <Build Include="Schema Objects\Sync Hack\UpdateMetadata.sql" />
-    <Build Include="Schema Objects\Sync Hack\RefreshElements.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Server.publish.xml" />
-    <None Include="Sync.config" />
     <None Include="Sync Hacks.txt" />
+    <None Include="Client.publish.xml" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="Scripts\Server ID Range.sql" />
-    <Build Include="Scripts\Sync Hack.sql" />
+    <Build Include="Stored Procedures\BulkDelete.sql" />
+    <Build Include="Stored Procedures\BulkInsert.sql" />
+    <Build Include="Stored Procedures\BulkUpdate.sql" />
+    <Build Include="Stored Procedures\Delete.sql" />
+    <Build Include="Stored Procedures\DeleteMetadata.sql" />
+    <Build Include="Stored Procedures\Insert.sql" />
+    <Build Include="Stored Procedures\InsertMetadata.sql" />
+    <Build Include="Stored Procedures\RefreshElements.sql" />
+    <Build Include="Stored Procedures\SelectChanges.sql" />
+    <Build Include="Stored Procedures\SelectRow.sql" />
+    <Build Include="Stored Procedures\TableType.sql" />
+    <Build Include="Stored Procedures\Update.sql" />
+    <Build Include="Stored Procedures\UpdateMetadata.sql" />
+    <PostDeploy Include="Scripts\Trigger.sql" />
   </ItemGroup>
 </Project>

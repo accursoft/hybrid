@@ -69,6 +69,9 @@
     <CodeAnalysisIgnoreBuiltInRules>false</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ApexSql.Diff.Api">
+      <HintPath>C:\Program Files (x86)\ApexSQL\ApexSQLDiffAPI2011\ApexSql.Diff.Api.dll</HintPath>
+    </Reference>
     <Reference Include="Ninject">
       <HintPath>..\packages\Ninject.2.2.1.4\lib\net40-Client\Ninject.dll</HintPath>
     </Reference>
@@ -108,6 +111,7 @@
     <Compile Include="ValueConverters.cs" />
     <Compile Include="ViewModel.cs" />
     <Compile Include="ViewModelLocator.cs" />
+    <EmbeddedResource Include="licenses.licx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -196,5 +200,14 @@
     <NotifyPropertyWeaverMsBuildTask.WeavingTask CheckForEquality="false" MessageImportance="Normal" />
   </Target>
   <UsingTask TaskName="NotifyPropertyWeaverMsBuildTask.WeavingTask" AssemblyFile="$(SolutionDir)Tools\NotifyPropertyWeaverMsBuildTask.dll" />
+  <PropertyGroup>
+    <PostBuildEvent>copy /Y "C:\Program Files (x86)\ApexSQL\ApexSQLDiffAPI2011\DynLib.dll" .
+copy /Y "C:\Program Files (x86)\ApexSQL\ApexSQLDiffAPI2011\ApexSqlDiffApi2011Activation.dll" .
+copy /Y "C:\Program Files (x86)\ApexSQL\ApexSQLDiffAPI2011\ActivationBroker.exe" .</PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>

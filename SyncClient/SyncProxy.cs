@@ -8,7 +8,7 @@ namespace SyncClient
     class SyncProxy : KnowledgeSyncProvider, IDisposable
     {
         string scope;
-        ISyncService proxy;
+        SyncServiceClient proxy;
         SyncIdFormatGroup idFormatGroup;
 
         public SyncProxy(string scope)

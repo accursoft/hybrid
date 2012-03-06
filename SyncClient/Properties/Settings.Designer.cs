@@ -59,11 +59,67 @@ namespace SyncClient.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=.\\SQLEXPRESS;AttachDbFilename=|DataDirectory|\\LocalData.mdf;Integrate" +
-            "d Security=True;Connect Timeout=30;User Instance=True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(local)\\SQLEXPRESS;Initial Catalog=Client;Integrated Security=True")]
         public string Local {
             get {
                 return ((string)(this["Local"]));
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public byte SchemaVersion {
+            get {
+                return ((byte)(this["SchemaVersion"]));
+            }
+            set {
+                this["SchemaVersion"] = value;
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("^Customers$,^Orders$")]
+        public string ApexSqlTables {
+            get {
+                return ((string)(this["ApexSqlTables"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("enable trigger Sync on database")]
+        public string EnableTrigger {
+            get {
+                return ((string)(this["EnableTrigger"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("disable trigger Sync on database")]
+        public string DisableTrigger {
+            get {
+                return ((string)(this["DisableTrigger"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(local)\\SQLEXPRESS")]
+        public string ApexSqlServer {
+            get {
+                return ((string)(this["ApexSqlServer"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Client")]
+        public string ApexSqlDb {
+            get {
+                return ((string)(this["ApexSqlDb"]));
             }
         }
     }

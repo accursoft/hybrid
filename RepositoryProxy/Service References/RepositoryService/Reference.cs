@@ -56,40 +56,40 @@ namespace RepositoryProxy.RepositoryService {
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="RepositoryService.IRepository")]
-    public interface IRepository {
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="RepositoryService.RepositoryService")]
+    public interface RepositoryService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRepository/GetCustomers", ReplyAction="http://tempuri.org/IRepository/GetCustomersResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/RepositoryService/GetCustomers", ReplyAction="http://tempuri.org/RepositoryService/GetCustomersResponse")]
         Model.Customer[] GetCustomers();
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRepository/SaveChanges", ReplyAction="http://tempuri.org/IRepository/SaveChangesResponse")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/RepositoryService/SaveChanges", ReplyAction="http://tempuri.org/RepositoryService/SaveChangesResponse")]
         int SaveChanges(Model.Customer[] customers, Model.Order[] orders);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface IRepositoryChannel : RepositoryProxy.RepositoryService.IRepository, System.ServiceModel.IClientChannel {
+    public interface RepositoryServiceChannel : RepositoryProxy.RepositoryService.RepositoryService, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class RepositoryClient : System.ServiceModel.ClientBase<RepositoryProxy.RepositoryService.IRepository>, RepositoryProxy.RepositoryService.IRepository {
+    public partial class RepositoryServiceClient : System.ServiceModel.ClientBase<RepositoryProxy.RepositoryService.RepositoryService>, RepositoryProxy.RepositoryService.RepositoryService {
         
-        public RepositoryClient() {
+        public RepositoryServiceClient() {
         }
         
-        public RepositoryClient(string endpointConfigurationName) : 
+        public RepositoryServiceClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public RepositoryClient(string endpointConfigurationName, string remoteAddress) : 
+        public RepositoryServiceClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public RepositoryClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public RepositoryServiceClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public RepositoryClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public RepositoryServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         

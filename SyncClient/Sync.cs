@@ -1,9 +1,15 @@
 ﻿using System;
 using System.Data.SqlClient;
-using SyncClient.Properties;
-using SyncClient.SyncService;
+using System.IO;
 using Microsoft.Synchronization;
 using Microsoft.Synchronization.Data.SqlServer;
+
+using ApexSql.Diff.Structure;
+using ApexSql.Diff;
+
+using SyncClient.Properties;
+using SyncClient.SyncService;
+using SyncClient.SchemaService;
 
 namespace SyncClient
 {
@@ -14,6 +20,39 @@ namespace SyncClient
             using (var local = new SqlConnection(Settings.Default.Local)) {
 
                 local.Open();
+
+                //check for schema update
+                using (var proxy = new SchemaServiceClient()) {
+                    byte version = proxy.GetSchemaVersion();
+                    if (version > Settings.Default.SchemaVersion) {
+
+                        //prepare comparison
+                        string schema = Path.GetTempFileName();
+                        File.WriteAllText(schema, proxy.GetSchema());
+                        
+                        StructureProject project = new StructureProject(schema, new ConnectionProperties(Settings.Default.ApexSqlServer, Settings.Default.ApexSqlDb));
+                        project.ComparisonOptions.IgnoreIdentitySeedAndIncrement = project.ComparisonOptions.IgnorePrimaryKeys = true;
+
+                        project.MappedObjects.ExcludeAllFromComparison();
+                        project.MappedTables.IncludeInComparison(Settings.Default.ApexSqlTables.Split(','));
+                        project.ComparedObjects.IncludeAllInSynchronization();
+
+                        //enable trigger to adjust sync scope
+                        new SqlCommand(Settings.Default.EnableTrigger, local).ExecuteNonQuery();
+
+                        //sync
+                        var errors = project.ExecuteSynchronizationScript();
+                        File.Delete(schema);
+                        if (errors.Length > 0)
+                            throw new ApplicationException(string.Join("\n", errors));
+
+                        //put trigger back to sleep
+                        new SqlCommand(Settings.Default.DisableTrigger, local).ExecuteNonQuery();
+
+                        Settings.Default.SchemaVersion = version;
+                        Settings.Default.Save();
+                    }
+                }
 
                 using (var proxy = new SyncProxy(Settings.Default.Scope)) {
 
