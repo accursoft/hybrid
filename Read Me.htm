@@ -53,6 +53,12 @@
     <p>ApexSQL&#39;s licensing requires certain files to be available to the application at runtime. These are copied to the output directory by post-build events in the
         Services and Client applications. Beware that the WCF services will pop up a modal dialog upon the first schema synchronisation during the trial period, so someone
         has to be watching out for this.</p>
+    <h3>x64</h3>
+    <p>The ApexSQL assemblies are x86. WcfSvcHost runs as x64. If you're running the solution from VS on an x64 machine, open a command prompt with administrator privileges at <a href="file:///C:/Program Files (x86)/Microsoft Visual Studio 10.0/Common7/IDE">
+        C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE</a>. Then run:</p>
+    <pre>copy WcfSvcHost.exe WcfSvcHost.exe.bak
+corflags /32BIT+ WcfSvcHost.exe
+sn -Vr WcfSvcHost.exe</pre>
     <h2>Diagnostics</h2>
     <p>The client and server are both configured to write WCF trace logs. The client also writes a plain-text error log. Inspect these to determine why it isn&#39;t working.
     </p>
@@ -69,7 +75,7 @@
         The IdRange setting in the&nbsp; Service&#39;s .config defines how many IDs to allocate to each client. The same range is used across all tables.</p>
     <h2>Solution Dependencies</h2>
     <ul>
-        <li>Install <a href="http://www.microsoft.com/download/en/details.aspx?displaylang=en&amp;id=12012">Sync Framework 4.0</a>.<b> Follow the instructions at the end of
+        <li>Install <a href="http://www.microsoft.com/download/en/details.aspx?displaylang=en&amp;id=12012">Sync Framework 4.0</a>. <b>Follow the instructions at the end of
             the download page carefully.</b></li>
         <li>The Database project uses <a href="http://msdn.microsoft.com/en-gb/data/hh297027">SQL Server Data Tools</a>.</li>
         <li>The Client project uses <a href="http://www.ninject.org/">Ninject</a>, which can be installed with <a href="http://nuget.org/">NuGet</a>.</li>
