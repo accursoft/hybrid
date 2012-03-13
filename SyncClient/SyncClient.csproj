@@ -64,15 +64,11 @@
     <Reference Include="ApexSql.Diff.Api">
       <HintPath>C:\Program Files (x86)\ApexSQL\ApexSQLDiffAPI2011\ApexSql.Diff.Api.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Synchronization, Version=2.1.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Synchronization.Data, Version=3.1.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Synchronization.Data.SqlServer, Version=3.1.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,13 +82,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
-    <Compile Include="Service References\SyncService\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
     <Compile Include="Sync.cs" />
-    <Compile Include="SyncProxy.cs" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0">
@@ -146,36 +136,11 @@
     <None Include="Service References\SchemaService\service1.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SyncService\Arrays.xsd">
+    <None Include="Service References\SchemaService\Services.xsd">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Service References\SyncService\Microsoft.Synchronization.Data.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SyncService\Microsoft.Synchronization.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SyncService\service.wsdl" />
-    <None Include="Service References\SyncService\service.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SyncService\service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SyncService\service2.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SyncService\service3.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SyncService\Services.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\SyncService\SyncClient.SyncService.Range.datasource">
+    <None Include="Service References\SchemaService\SyncClient.SchemaService.Range.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
-    </None>
-    <None Include="Service References\SyncService\System.Data.xsd">
-      <SubType>Designer</SubType>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -188,19 +153,6 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadataStorage Include="Service References\SchemaService\" />
-    <WCFMetadataStorage Include="Service References\SyncService\" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SyncService\configuration91.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SyncService\configuration.svcinfo" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Service References\SyncService\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Repository\Repository.csproj">

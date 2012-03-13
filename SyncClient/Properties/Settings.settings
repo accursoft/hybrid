@@ -2,9 +2,6 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="SyncClient.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="Scope" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">Scope</Value>
-    </Setting>
     <Setting Name="MinID" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
@@ -22,20 +19,20 @@
     <Setting Name="SchemaVersion" Type="System.Byte" Scope="User">
       <Value Profile="(Default)">0</Value>
     </Setting>
-    <Setting Name="ApexSqlTables" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">^Customers$,^Orders$</Value>
+    <Setting Name="Tables" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Customers,Orders</Value>
     </Setting>
-    <Setting Name="EnableTrigger" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">enable trigger Sync on database</Value>
-    </Setting>
-    <Setting Name="DisableTrigger" Type="System.String" Scope="Application">
-      <Value Profile="(Default)">disable trigger Sync on database</Value>
-    </Setting>
-    <Setting Name="ApexSqlServer" Type="System.String" Scope="Application">
+    <Setting Name="LocalServer" Type="System.String" Scope="Application">
       <Value Profile="(Default)">(local)\SQLEXPRESS</Value>
     </Setting>
-    <Setting Name="ApexSqlDb" Type="System.String" Scope="Application">
+    <Setting Name="LocalDb" Type="System.String" Scope="Application">
       <Value Profile="(Default)">Client</Value>
+    </Setting>
+    <Setting Name="RemoteServer" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">(local)\SQLFULL</Value>
+    </Setting>
+    <Setting Name="RemoteDb" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">Server</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Data.SqlClient;
-using System.IO;
-using Microsoft.Synchronization;
-using Microsoft.Synchronization.Data.SqlServer;
+using System.Linq;
 
-using ApexSql.Diff.Structure;
 using ApexSql.Diff;
+using ApexSql.Diff.Structure;
+using ApexSql.Diff.Data;
 
 using SyncClient.Properties;
-using SyncClient.SyncService;
 using SyncClient.SchemaService;
 
 namespace SyncClient
@@ -17,76 +15,74 @@ namespace SyncClient
     {
         public static void Synchronize()
         {
-            using (var local = new SqlConnection(Settings.Default.Local)) {
+            ConnectionProperties
+                remote = new ConnectionProperties(Settings.Default.RemoteServer, Settings.Default.RemoteDb),
+                local = new ConnectionProperties(Settings.Default.LocalServer, Settings.Default.LocalDb);
 
-                local.Open();
+            //check for schema update
+            byte version;
+            using (var proxy = new SchemaServiceClient())
+                version = proxy.GetSchemaVersion();
 
-                //check for schema update
-                using (var proxy = new SchemaServiceClient()) {
-                    byte version = proxy.GetSchemaVersion();
-                    if (version > Settings.Default.SchemaVersion) {
+            if (version > Settings.Default.SchemaVersion) {
+                //synchronise schema
+                StructureProject structure = new StructureProject(remote, local);
 
-                        //prepare comparison
-                        string schema = Path.GetTempFileName();
-                        File.WriteAllText(schema, proxy.GetSchema());
-                        
-                        StructureProject project = new StructureProject(schema, new ConnectionProperties(Settings.Default.ApexSqlServer, Settings.Default.ApexSqlDb));
-                        project.ComparisonOptions.IgnoreIdentitySeedAndIncrement = project.ComparisonOptions.IgnorePrimaryKeys = true;
+                structure.ComparisonOptions.IgnoreIdentitySeedAndIncrement = true;
 
-                        project.MappedObjects.ExcludeAllFromComparison();
-                        project.MappedTables.IncludeInComparison(Settings.Default.ApexSqlTables.Split(','));
-                        project.ComparedObjects.IncludeAllInSynchronization();
+                structure.MappedObjects.ExcludeAllFromComparison();
+                structure.MappedTables.IncludeInComparison(Settings.Default.Tables.Split(',').Select(t => '^' + t + '$').ToArray());
+                structure.ComparedObjects.IncludeAllInSynchronization();
 
-                        //enable trigger to adjust sync scope
-                        new SqlCommand(Settings.Default.EnableTrigger, local).ExecuteNonQuery();
+                Synchronise(structure);
 
-                        //sync
-                        var errors = project.ExecuteSynchronizationScript();
-                        File.Delete(schema);
-                        if (errors.Length > 0)
-                            throw new ApplicationException(string.Join("\n", errors));
+                Settings.Default.SchemaVersion = version;
+                Settings.Default.Save();
+            }
 
-                        //put trigger back to sleep
-                        new SqlCommand(Settings.Default.DisableTrigger, local).ExecuteNonQuery();
+            //synchronise data
+            DataProject data = new DataProject(remote, local);
 
-                        Settings.Default.SchemaVersion = version;
-                        Settings.Default.Save();
-                    }
+            data.ComparedTables.IncludeAllInSynchronization();
+
+            //receive server data
+            Synchronise(data);
+
+            //send local data
+            data.SynchronizationOptions.SynchronizationDirection = SynchronizationDirection.DestinationToSource;
+            Synchronise(data);
+
+            //do we have an ID range?
+            if (Settings.Default.MaxID == 0) {
+                using (var client = new SchemaServiceClient()) {
+                    var range = client.GetIdRange(Environment.MachineName);
+                    Settings.Default.MinID = range.Min;
+                    Settings.Default.MaxID = range.Max;
+                    Settings.Default.Save();
                 }
+            }
 
-                using (var proxy = new SyncProxy(Settings.Default.Scope)) {
+            //reseed the client
+            using (var db = new SqlConnection(Settings.Default.Local))
+                Repository.Repository.Reseed(Settings.Default.MinID, Settings.Default.MaxID, db);
+        }
 
-                    //provision if needed
-                    if (!IsProvisioned())
-                        new SqlSyncScopeProvisioning(local, proxy.GetScopeDescription()).Apply();
-
-                    //synchronise
-                    new SyncOrchestrator() {
-                        LocalProvider = new SqlSyncProvider(Settings.Default.Scope, local),
-                        RemoteProvider = proxy,
-                        Direction = SyncDirectionOrder.DownloadAndUpload
-                    }.Synchronize();
-                }
-
-                //do we have an ID range?
-                if (Settings.Default.MaxID == 0) {
-                    using (var client = new SyncServiceClient()) {
-                        var range = client.GetIdRange(Environment.MachineName);
-                        Settings.Default.MinID = range.Min;
-                        Settings.Default.MaxID = range.Max;
-                        Settings.Default.Save();
-                    }
-                }
-
-                //reseed the client
-                Repository.Repository.Reseed(Settings.Default.MinID, Settings.Default.MaxID, local);
+        private static void Synchronise(ProjectBase project)
+        {
+            try {
+                var errors = project.ExecuteSynchronizationScript();
+                if (errors.Length > 0)
+                    throw new ApplicationException(string.Join("\n", errors));
+            }
+            catch (UnhandledException e) {
+                if (!(e.InnerException is NoSelectedForOperationObjectsException))
+                    throw;
             }
         }
 
         public static bool IsProvisioned()
         {
-            using (var local = new SqlConnection(Settings.Default.Local))
-                return new SqlSyncScopeProvisioning(local).ScopeExists(Settings.Default.Scope);
+            return Settings.Default.SchemaVersion > 0;
         }
     }
 }

@@ -48,18 +48,11 @@
     <CodeAnalysisIgnoreBuiltInRules>true</CodeAnalysisIgnoreBuiltInRules>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="ApexSql.Diff.Api">
-      <HintPath>C:\Program Files (x86)\ApexSQL\ApexSQLDiffAPI2011\ApexSql.Diff.Api.dll</HintPath>
-    </Reference>
-    <Reference Include="Microsoft.Synchronization, Version=2.1.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Synchronization.Data, Version=3.1.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.Synchronization.Data.SqlServer, Version=3.1.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
     <Reference Include="System.Data.Linq" />
     <Reference Include="System.ServiceModel" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IdRanges.designer.cs">
@@ -76,7 +69,6 @@
     <Compile Include="Range.cs" />
     <Compile Include="RepositoryService.cs" />
     <Compile Include="SchemaService.cs" />
-    <Compile Include="SyncService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -110,9 +102,6 @@
       <Name>Repository</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="licenses.licx" />
-  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
@@ -124,9 +113,8 @@
     </VisualStudio>
   </ProjectExtensions>
   <PropertyGroup>
-    <PostBuildEvent>copy /Y "C:\Program Files (x86)\ApexSQL\ApexSQLDiffAPI2011\DynLib.dll" .
-copy /Y "C:\Program Files (x86)\ApexSQL\ApexSQLDiffAPI2011\ApexSqlDiffApi2011Activation.dll" .
-copy /Y "C:\Program Files (x86)\ApexSQL\ApexSQLDiffAPI2011\ActivationBroker.exe" .</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>

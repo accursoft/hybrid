@@ -14,6 +14,7 @@
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import namespace="http://tempuri.org/" />
       <xsd:import namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import namespace="http://schemas.datacontract.org/2004/07/Services" />
     </xsd:schema>
   </wsdl:types>
   <wsdl:message name="SchemaService_GetSchemaVersion_InputMessage">
@@ -22,20 +23,20 @@
   <wsdl:message name="SchemaService_GetSchemaVersion_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetSchemaVersionResponse" />
   </wsdl:message>
-  <wsdl:message name="SchemaService_GetSchema_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetSchema" />
+  <wsdl:message name="SchemaService_GetIdRange_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetIdRange" />
   </wsdl:message>
-  <wsdl:message name="SchemaService_GetSchema_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetSchemaResponse" />
+  <wsdl:message name="SchemaService_GetIdRange_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetIdRangeResponse" />
   </wsdl:message>
   <wsdl:portType name="SchemaService">
     <wsdl:operation name="GetSchemaVersion">
       <wsdl:input wsaw:Action="http://tempuri.org/SchemaService/GetSchemaVersion" message="tns:SchemaService_GetSchemaVersion_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/SchemaService/GetSchemaVersionResponse" message="tns:SchemaService_GetSchemaVersion_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="GetSchema">
-      <wsdl:input wsaw:Action="http://tempuri.org/SchemaService/GetSchema" message="tns:SchemaService_GetSchema_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/SchemaService/GetSchemaResponse" message="tns:SchemaService_GetSchema_OutputMessage" />
+    <wsdl:operation name="GetIdRange">
+      <wsdl:input wsaw:Action="http://tempuri.org/SchemaService/GetIdRange" message="tns:SchemaService_GetIdRange_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/SchemaService/GetIdRangeResponse" message="tns:SchemaService_GetIdRange_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_SchemaService" type="tns:SchemaService">
@@ -51,8 +52,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetSchema">
-      <soap12:operation soapAction="http://tempuri.org/SchemaService/GetSchema" style="document" />
+    <wsdl:operation name="GetIdRange">
+      <soap12:operation soapAction="http://tempuri.org/SchemaService/GetIdRange" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

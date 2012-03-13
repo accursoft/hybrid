@@ -6,6 +6,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Model", "Model\Model.csproj", "{3D4FA77D-0C6F-4DAE-A796-D27BD1C1543A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SyncClient", "SyncClient\SyncClient.csproj", "{0DF1C3FF-450B-4C44-A1D3-3F52133A84EE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{84FC36D1-3D55-46FF-B619-F278B2C842D9} = {84FC36D1-3D55-46FF-B619-F278B2C842D9}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Repository", "Repository\Repository.csproj", "{93EBB4B3-8ACA-4703-841C-2813F796B1FC}"
 EndProject
@@ -13,14 +16,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RepositoryProxy", "Reposito
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{84FC36D1-3D55-46FF-B619-F278B2C842D9}"
 EndProject
-Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Sync Hacks", "Sync Hacks\Sync Hacks.sqlproj", "{D9CC5107-5F9D-44CF-A740-555980A07CFD}"
-EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "Server", "Server\Server.sqlproj", "{6029BF0D-0D52-4099-B4DF-4EAE1861B4FD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CBFDB78C-D66D-4886-9176-B2330742E6AE}"
-    ProjectSection(SolutionItems) = preProject
-        Read Me.htm = Read Me.htm
-    EndProjectSection
+	ProjectSection(SolutionItems) = preProject
+		Read Me.htm = Read Me.htm
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -52,8 +53,6 @@ Global
 		{84FC36D1-3D55-46FF-B619-F278B2C842D9}.Debug|x86.Build.0 = Debug|x86
 		{84FC36D1-3D55-46FF-B619-F278B2C842D9}.Release|x86.ActiveCfg = Release|x86
 		{84FC36D1-3D55-46FF-B619-F278B2C842D9}.Release|x86.Build.0 = Release|x86
-		{D9CC5107-5F9D-44CF-A740-555980A07CFD}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{D9CC5107-5F9D-44CF-A740-555980A07CFD}.Release|x86.ActiveCfg = Release|Any CPU
 		{6029BF0D-0D52-4099-B4DF-4EAE1861B4FD}.Debug|x86.ActiveCfg = Debug|Any CPU
 		{6029BF0D-0D52-4099-B4DF-4EAE1861B4FD}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection

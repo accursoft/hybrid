@@ -119,7 +119,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Server.publish.xml" />
-    <None Include="Sync.config" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\Server ID Range.sql" />

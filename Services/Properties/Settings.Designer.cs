@@ -62,28 +62,10 @@ namespace Services.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public byte SchemaVersion {
             get {
                 return ((byte)(this["SchemaVersion"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("(local)\\SQLFULL")]
-        public string ApexSqlServer {
-            get {
-                return ((string)(this["ApexSqlServer"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Server")]
-        public string ApexSqlDb {
-            get {
-                return ((string)(this["ApexSqlDb"]));
             }
         }
     }

@@ -23,15 +23,6 @@ namespace SyncClient.Properties {
             }
         }
         
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Scope")]
-        public string Scope {
-            get {
-                return ((string)(this["Scope"]));
-            }
-        }
-        
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("0")]
@@ -80,46 +71,46 @@ namespace SyncClient.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("^Customers$,^Orders$")]
-        public string ApexSqlTables {
+        [global::System.Configuration.DefaultSettingValueAttribute("Customers,Orders")]
+        public string Tables {
             get {
-                return ((string)(this["ApexSqlTables"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("enable trigger Sync on database")]
-        public string EnableTrigger {
-            get {
-                return ((string)(this["EnableTrigger"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("disable trigger Sync on database")]
-        public string DisableTrigger {
-            get {
-                return ((string)(this["DisableTrigger"]));
+                return ((string)(this["Tables"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("(local)\\SQLEXPRESS")]
-        public string ApexSqlServer {
+        public string LocalServer {
             get {
-                return ((string)(this["ApexSqlServer"]));
+                return ((string)(this["LocalServer"]));
             }
         }
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("Client")]
-        public string ApexSqlDb {
+        public string LocalDb {
             get {
-                return ((string)(this["ApexSqlDb"]));
+                return ((string)(this["LocalDb"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("(local)\\SQLFULL")]
+        public string RemoteServer {
+            get {
+                return ((string)(this["RemoteServer"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("Server")]
+        public string RemoteDb {
+            get {
+                return ((string)(this["RemoteDb"]));
             }
         }
     }
