@@ -19,43 +19,37 @@ namespace SyncClient
                 remote = new ConnectionProperties(Settings.Default.RemoteServer, Settings.Default.RemoteDb),
                 local = new ConnectionProperties(Settings.Default.LocalServer, Settings.Default.LocalDb);
 
-            //check for schema update
-            byte version;
-            using (var proxy = new SchemaServiceClient())
-                version = proxy.GetSchemaVersion();
+            using (var service = new SchemaServiceClient()) {
 
-            if (version > Settings.Default.SchemaVersion) {
-                //synchronise schema
-                StructureProject structure = new StructureProject(remote, local);
+                //check for schema update
+                byte version = service.GetSchemaVersion();
+                if (version > Settings.Default.SchemaVersion) {
+                    //synchronise schema
+                    StructureProject project = new StructureProject(remote, local);
 
-                structure.ComparisonOptions.IgnoreIdentitySeedAndIncrement = true;
+                    project.ComparisonOptions.IgnoreIdentitySeedAndIncrement = true;
 
-                structure.MappedObjects.ExcludeAllFromComparison();
-                structure.MappedTables.IncludeInComparison(Settings.Default.Tables.Split(',').Select(t => '^' + t + '$').ToArray());
-                structure.ComparedObjects.IncludeAllInSynchronization();
+                    project.MappedObjects.ExcludeAllFromComparison();
+                    project.MappedTables.IncludeInComparison(Settings.Default.Tables.Split(',').Select(t => '^' + t + '$').ToArray());
+                    project.ComparedObjects.IncludeAllInSynchronization();
 
-                Synchronise(structure);
+                    Synchronise(project);
 
-                Settings.Default.SchemaVersion = version;
-                Settings.Default.Save();
-            }
+                    Settings.Default.SchemaVersion = version;
+                    Settings.Default.Save();
+                }
 
-            //synchronise data
-            DataProject data = new DataProject(remote, local);
+                //synchronise data
+                SynchroniseData(remote, local);
+                SynchroniseData(local, remote);
 
-            data.ComparedTables.IncludeAllInSynchronization();
+                //reseed the server
+                //TODO race condition
+                service.ReSeed();
 
-            //receive server data
-            Synchronise(data);
-
-            //send local data
-            data.SynchronizationOptions.SynchronizationDirection = SynchronizationDirection.DestinationToSource;
-            Synchronise(data);
-
-            //do we have an ID range?
-            if (Settings.Default.MaxID == 0) {
-                using (var client = new SchemaServiceClient()) {
-                    var range = client.GetIdRange(Environment.MachineName);
+                //do we have an ID range?
+                if (Settings.Default.MaxID == 0) {
+                    var range = service.GetIdRange(Environment.MachineName);
                     Settings.Default.MinID = range.Min;
                     Settings.Default.MaxID = range.Max;
                     Settings.Default.Save();
@@ -65,6 +59,16 @@ namespace SyncClient
             //reseed the client
             using (var db = new SqlConnection(Settings.Default.Local))
                 Repository.Repository.Reseed(Settings.Default.MinID, Settings.Default.MaxID, db);
+        }
+
+        private static void SynchroniseData(ConnectionProperties source, ConnectionProperties destination)
+        {
+            DataProject project = new DataProject(source, destination);
+#pragma warning disable 612
+            project.ComparisonOptions.CompareAdditionalRows = false;
+#pragma warning restore 612
+            project.ComparedObjects.IncludeAllInSynchronization();
+            Synchronise(project);
         }
 
         private static void Synchronise(ProjectBase project)
@@ -77,6 +81,9 @@ namespace SyncClient
             catch (UnhandledException e) {
                 if (!(e.InnerException is NoSelectedForOperationObjectsException))
                     throw;
+            }
+            finally {
+                project.CloseConnectionToDataSources();
             }
         }
 

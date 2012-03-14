@@ -15,28 +15,10 @@
     <h2>Database Server</h2>
     <ol>
         <li>Install SQL Server.</li>
-        <li>Build the Sync Hacks project, then deploy the SQLCMD script from its output folder. Alternatively, double-click Server.publish.xml do build and publish.</li>
-        <li>Ditto for the Server project.</li>
-        <li>Run the sync configuration utility from a computer with Sync Framework 4.0 installed, typically located in <a href="file:///C:/Program%20Files%20(x86)/Microsoft%20SDKs/Microsoft%20Sync%20Framework/4.0/bin/SyncSvcUtilHelper.exe">
-            C:\Program Files (x86)\Microsoft SDKs\Microsoft Sync Framework\4.0\bin\SyncSvcUtilHelper.exe</a>. Sync.config from the database project can be used as the configuration
-            file, but you may need to use the &quot;Edit&quot; option to ensure that it has the correct connection string and meta-data for the database you just created.
-            <ol>
-                <li>Click "1. Generate or Edit Sync Configuration".</li>
-                <li>Load Sync.config.</li>
-                <li>Click through the subsequent screens, ensuring that the connection and schema information is as desired.</li>
-            </ol>
-        </li>
-        <li>Use the sync configuration utility to provision the database.
-            <ol>
-                <li>Click "2. Provision or Deprovision"</li>
-                <li>Load the config file from step 3.</li>
-                <li>Click Next.</li>
-            </ol>
-        </li>
+        <li>Build the Server project, then deploy the SQLCMD script from its output folder. Alternatively, double-click Server.publish.xml do build and publish.</li>
     </ol>
     <h2>Web Server</h2>
     <ol>
-        <li>Install&nbsp; Sync Framework 2.1.</li>
         <li>Install the Services project as an IIS application.</li>
         <li>Enable net.tcp transport.</li>
         <li>Edit the .config file to ensure that the connection strings and WCF configuration are correct.</li>
@@ -44,8 +26,7 @@
     <h2>Client</h2>
     <ol>
         <li>Install SQL Server Express on the client.</li>
-        <li>Install Sync Framework 2.1 (or later) on the client.</li>
-        <li>Deploy the SQLCMD script from the Sync Hacks output folder, or double-click Client.publish.xml.</li>
+        <li>Create an empty database called Client.</li>
         <li>Install the client application.</li>
         <li>Edit the client&#39;s .config to ensure that the connection strings and WCF configuration are correct.</li>
     </ol>
@@ -54,8 +35,8 @@
         Services and Client applications. Beware that the WCF services will pop up a modal dialog upon the first schema synchronisation during the trial period, so someone
         has to be watching out for this.</p>
     <h3>x64</h3>
-    <p>The ApexSQL assemblies are x86. WcfSvcHost runs as x64. If you're running the solution from VS on an x64 machine, open a command prompt with administrator privileges at <a href="file:///C:/Program Files (x86)/Microsoft Visual Studio 10.0/Common7/IDE">
-        C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE</a>. Then run:</p>
+    <p>The ApexSQL assemblies are x86. WcfSvcHost runs as x64. If you're running the solution from VS on an x64 machine, open a command prompt with administrator privileges
+        at <a href="file:///C:/Program Files (x86)/Microsoft Visual Studio 10.0/Common7/IDE">C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE</a>. Then run:</p>
     <pre>copy WcfSvcHost.exe WcfSvcHost.exe.bak
 corflags /32BIT+ WcfSvcHost.exe
 sn -Vr WcfSvcHost.exe</pre>
@@ -75,27 +56,11 @@ sn -Vr WcfSvcHost.exe</pre>
         The IdRange setting in the&nbsp; Service&#39;s .config defines how many IDs to allocate to each client. The same range is used across all tables.</p>
     <h2>Solution Dependencies</h2>
     <ul>
-        <li>Install <a href="http://www.microsoft.com/download/en/details.aspx?displaylang=en&amp;id=12012">Sync Framework 4.0</a>. <b>Follow the instructions at the end of
-            the download page carefully.</b></li>
         <li>The Database project uses <a href="http://msdn.microsoft.com/en-gb/data/hh297027">SQL Server Data Tools</a>.</li>
         <li>The Client project uses <a href="http://www.ninject.org/">Ninject</a>, which can be installed with <a href="http://nuget.org/">NuGet</a>.</li>
         <li>The Client project also uses the <a href="http://visualstudiogallery.msdn.microsoft.com/bd351303-db8c-4771-9b22-5e51524fccd3">Notify Property Weaver extension</a>
             to implement INotifyPropertyChanged.</li>
         <li>The Client and Services projects use <a href="http://www.apexsql.com/sql_tools_diffapi.aspx">ApexSQL Diff API</a>.</li>
-    </ul>
-    <h2>Sync Scopes</h2>
-    <p>The sync framework uses named sync scopes. These are defined when provisioning the server, and in the client&#39;s .config.</p>
-    <p>Each sync scope defines the tables and columns to be synchronised. When the client starts, it checks whether its local database has been provisioned. If not, it
-        will provision the configured scope. This creates the relevant schema.</p>
-    <p>When new tables are added, a new sync scope should be created with the sync configuration utility. The client&#39;s .config can then be changed to point to the new
-        scope. No code changes are required.</p>
-    <p>For further information, see:</p>
-    <ul>
-        <li><a href="http://msdn.microsoft.com/en-us/library/gg294195(v=sql.110).aspx">How to: Use Synchronization Scopes</a></li>
-        <li><a href="http://jtabadero.wordpress.com/2011/03/21/modifying-sync-framework-scope-definition-part-1-introduction/">Modifying Sync Framework Scope Definition – Part
-            1 – Introduction</a></li>
-        <li><a href="http://jtabadero.wordpress.com/2011/03/24/modifying-sync-framework-scope-definition-part-2-workarounds/">Modifying Sync Framework Scope Definition – Part
-            2 – Workarounds</a></li>
     </ul>
     <h2>Schema Synchronisation</h2>
     <p>The service and client have a SchemaVersion setting. Before the client synchronises, it checks the server's schema version. If this is greater than the client's

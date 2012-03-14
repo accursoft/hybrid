@@ -8,10 +8,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace SyncClient.SchemaService
-{
-
-
+namespace SyncClient.SchemaService {
+    using System.Runtime.Serialization;
+    using System;
+    
+    
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Range", Namespace="http://schemas.datacontract.org/2004/07/Services")]
@@ -81,6 +82,9 @@ namespace SyncClient.SchemaService
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SchemaService/GetIdRange", ReplyAction="http://tempuri.org/SchemaService/GetIdRangeResponse")]
         SyncClient.SchemaService.Range GetIdRange(string machine);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/SchemaService/ReSeed", ReplyAction="http://tempuri.org/SchemaService/ReSeedResponse")]
+        void ReSeed();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -116,6 +120,10 @@ namespace SyncClient.SchemaService
         
         public SyncClient.SchemaService.Range GetIdRange(string machine) {
             return base.Channel.GetIdRange(machine);
+        }
+        
+        public void ReSeed() {
+            base.Channel.ReSeed();
         }
     }
 }
