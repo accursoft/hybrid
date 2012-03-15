@@ -43,10 +43,6 @@ namespace SyncClient
                 SynchroniseData(remote, local);
                 SynchroniseData(local, remote);
 
-                //reseed the server
-                //TODO race condition
-                service.ReSeed();
-
                 //do we have an ID range?
                 if (Settings.Default.MaxID == 0) {
                     var range = service.GetIdRange(Environment.MachineName);

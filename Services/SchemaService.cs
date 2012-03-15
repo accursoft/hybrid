@@ -1,6 +1,5 @@
 ﻿using System.Linq;
 using System.ServiceModel;
-using System.Data.SqlClient;
 
 using Services.Properties;
 
@@ -20,22 +19,19 @@ namespace Services
         {
             IdRange range;
             using (var context = new IdRangesDataContext()) {
-                if ((range = context.IdRanges.SingleOrDefault(r => r.Machine == machine)) == null) {
+                //client ranges are negative
+                var ranges = context.IdRanges.Where(r => r.Min < 0);
+                //fetch existing range if there is one
+                if ((range = ranges.SingleOrDefault(r => r.Machine == machine)) == null) {
+                    //otherwise generate a new range
                     range = new IdRange() { Machine = machine };
-                    range.Min = context.IdRanges.Max(r => r.Max) + 1;
+                    range.Min = ranges.Count() > 0 ? ranges.Max(r => r.Max) + 1 : Settings.Default.MinClientId;
                     range.Max = range.Min + Settings.Default.IdRange - 1;
                     context.IdRanges.InsertOnSubmit(range);
                     context.SubmitChanges();
                 }
                 return new Range(range.Min, range.Max);
             }
-        }
-
-        [OperationContract]
-        public void ReSeed()
-        {
-            using (var db = new SqlConnection(Settings.Default.Server))
-                Repository.Repository.Reseed(Settings.Default.MinId, Settings.Default.MaxId, db);
         }
     }
 }

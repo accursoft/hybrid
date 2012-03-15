@@ -27,14 +27,4 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ReSeed">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="ReSeedResponse">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
 </xs:schema>

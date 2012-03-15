@@ -29,12 +29,6 @@
   <wsdl:message name="SchemaService_GetIdRange_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetIdRangeResponse" />
   </wsdl:message>
-  <wsdl:message name="SchemaService_ReSeed_InputMessage">
-    <wsdl:part name="parameters" element="tns:ReSeed" />
-  </wsdl:message>
-  <wsdl:message name="SchemaService_ReSeed_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ReSeedResponse" />
-  </wsdl:message>
   <wsdl:portType name="SchemaService">
     <wsdl:operation name="GetSchemaVersion">
       <wsdl:input wsaw:Action="http://tempuri.org/SchemaService/GetSchemaVersion" message="tns:SchemaService_GetSchemaVersion_InputMessage" />
@@ -43,10 +37,6 @@
     <wsdl:operation name="GetIdRange">
       <wsdl:input wsaw:Action="http://tempuri.org/SchemaService/GetIdRange" message="tns:SchemaService_GetIdRange_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/SchemaService/GetIdRangeResponse" message="tns:SchemaService_GetIdRange_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="ReSeed">
-      <wsdl:input wsaw:Action="http://tempuri.org/SchemaService/ReSeed" message="tns:SchemaService_ReSeed_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/SchemaService/ReSeedResponse" message="tns:SchemaService_ReSeed_OutputMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="NetTcpBinding_SchemaService" type="tns:SchemaService">
@@ -64,15 +54,6 @@
     </wsdl:operation>
     <wsdl:operation name="GetIdRange">
       <soap12:operation soapAction="http://tempuri.org/SchemaService/GetIdRange" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ReSeed">
-      <soap12:operation soapAction="http://tempuri.org/SchemaService/ReSeed" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
