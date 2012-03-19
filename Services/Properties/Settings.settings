@@ -13,12 +13,6 @@
     <Setting Name="IdRange" Type="System.Int32" Scope="Application">
       <Value Profile="(Default)">10000</Value>
     </Setting>
-    <Setting Name="MinId" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="MaxId" Type="System.Int32" Scope="Application">
-      <Value Profile="(Default)">1000</Value>
-    </Setting>
     <Setting Name="SchemaVersion" Type="System.Byte" Scope="Application">
       <Value Profile="(Default)">1</Value>
     </Setting>

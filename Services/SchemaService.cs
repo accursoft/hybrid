@@ -19,8 +19,7 @@ namespace Services
         {
             IdRange range;
             using (var context = new IdRangesDataContext()) {
-                //client ranges are negative
-                var ranges = context.IdRanges.Where(r => r.Min < 0);
+                var ranges = context.IdRanges;
                 //fetch existing range if there is one
                 if ((range = ranges.SingleOrDefault(r => r.Machine == machine)) == null) {
                     //otherwise generate a new range

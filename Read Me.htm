@@ -50,9 +50,8 @@ sn -Vr WcfSvcHost.exe</pre>
         <li>Requests from the client must make their way to the database server with a valid database logon that has the necessary permissions.</li>
     </ol>
     <h2>The IdRanges Table</h2>
-    <p>The database project contains a post-deployment script, which reserves the Server&#39;s ID ranges. The same range is defined in the Service&#39;s .config (MinId
-        and MaxId). If either of these are changed, the other must also be changed to match.</p>
-    <p>When a client connects to the server for the first time, it requests an ID range. These are tracked in the IdRanges table, where the server has a null machine name.
+    <p>When a client connects to the server for the first time, it requests an ID range. These are tracked in the IdRanges table, and are negative. The server uses 
+        positive IDs.
         The IdRange setting in the&nbsp; Service&#39;s .config defines how many IDs to allocate to each client. The same range is used across all tables.</p>
     <h2>Solution Dependencies</h2>
     <ul>

@@ -1,1 +1,0 @@
-﻿INSERT IdRanges VALUES (NULL, 0, 1000)

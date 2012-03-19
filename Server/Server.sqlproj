@@ -94,7 +94,6 @@
     <Folder Include="Schema Objects\" />
     <Folder Include="Schema Objects\Tables\" />
     <Folder Include="Schema Objects\Tables\Keys\" />
-    <Folder Include="Scripts" />
   </ItemGroup>
   <ItemGroup>
     <BuildContributorArgument Include="OutDir=$(OutDir)" />
@@ -119,8 +118,5 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Server.publish.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <PostDeploy Include="Scripts\Server ID Range.sql" />
   </ItemGroup>
 </Project>
