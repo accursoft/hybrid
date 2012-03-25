@@ -40,6 +40,9 @@
     <pre>copy WcfSvcHost.exe WcfSvcHost.exe.bak
 corflags /32BIT+ WcfSvcHost.exe
 sn -Vr WcfSvcHost.exe</pre>
+    <h3>Synchronisation Conflicts</h3>
+    <p>In the event of a conflict, the server always wins. This can probably be changed to client always wins, but the API does not allow for anything else.</p>
+    <p>Deleting rows from the client will not delete corresponding rows on the server.</p>
     <h2>Diagnostics</h2>
     <p>The client and server are both configured to write WCF trace logs. The client also writes a plain-text error log. Inspect these to determine why it isn&#39;t working.
     </p>

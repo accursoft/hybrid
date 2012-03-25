@@ -8,6 +8,9 @@ using ApexSql.Diff.Data;
 
 using SyncClient.Properties;
 using SyncClient.SchemaService;
+using ApexSql.Diff.SqlServer;
+using System.Text;
+using System.Data;
 
 namespace SyncClient
 {
@@ -25,23 +28,66 @@ namespace SyncClient
                 byte version = service.GetSchemaVersion();
                 if (version > Settings.Default.SchemaVersion) {
                     //synchronise schema
-                    StructureProject project = new StructureProject(remote, local);
+                    StructureProject structure = new StructureProject(remote, local);
 
-                    project.ComparisonOptions.IgnoreIdentitySeedAndIncrement = true;
+                    structure.ComparisonOptions.IgnoreIdentitySeedAndIncrement = true;
 
-                    project.MappedObjects.ExcludeAllFromComparison();
-                    project.MappedTables.IncludeInComparison(Settings.Default.Tables.Split(',').Select(t => '^' + t + '$').ToArray());
-                    project.ComparedObjects.IncludeAllInSynchronization();
+                    structure.MappedObjects.ExcludeAllFromComparison();
+                    structure.MappedTables.IncludeInComparison(Settings.Default.Tables.Split(',').Select(t => '^' + t + '$').ToArray());
+                    structure.MappedTriggers.IncludeInComparison(Settings.Default.Tables.Split(',').Select(t => '^' + t + "_TimeStamp$").ToArray());
+                    structure.ComparedObjects.IncludeAllInSynchronization();
 
-                    Synchronise(project);
+                    Synchronise(structure);
 
                     Settings.Default.SchemaVersion = version;
                     Settings.Default.Save();
                 }
 
-                //synchronise data
-                SynchroniseData(remote, local);
-                SynchroniseData(local, remote);
+                //server to client
+                DataProject down = new DataProject(remote, local);
+#pragma warning disable 612
+                down.ComparisonOptions.CompareAdditionalRows = false;
+#pragma warning restore 612
+
+                //only retrieve rows which have changed since last sync
+                string timestamp = "TimeStamp > '" + Settings.Default.LastSync.ToString("yyyy-MM-dd HH:mm:ss") + "'";
+                foreach (MappedDataObject<Table> table in down.MappedTables) {
+                    table.WhereClause.SourceFilter = timestamp;
+                    table.WhereClause.UseSourceFilterForDestination = false;
+                }
+
+                down.ComparedObjects.IncludeAllInSynchronization();
+                Synchronise(down);
+
+                //client to server
+                DataProject up = new DataProject(local, remote);
+#pragma warning disable 612
+                up.ComparisonOptions.CompareAdditionalRows = false;
+#pragma warning restore 612
+
+                using (var con = new SqlConnection(Settings.Default.Local))
+                    foreach (MappedDataObject<Table> table in up.MappedTables) {
+                        StringBuilder ids = new StringBuilder("ID in (");
+                        using (var com = new SqlCommand("select ID from " + table.SourceName + " where " + timestamp, con)) {
+                            con.Open();
+                            using (var results = com.ExecuteReader(CommandBehavior.CloseConnection))
+                                while (results.Read())
+                                    ids.Append(results[0]).Append(',');
+                        }
+                        if (ids[ids.Length - 1] == '(')
+                            table.IncludeInComparison = false;
+                        else
+                            table.WhereClause.SourceFilter = ids.Remove(ids.Length - 1, 1).Append(')').ToString();
+                    }
+
+                try {
+                    up.ComparedObjects.IncludeAllInSynchronization();
+                    Synchronise(up);
+                }
+                catch (NoSelectedForOperationObjectsException) { }
+
+                Settings.Default.LastSync = DateTime.Now;
+                Settings.Default.Save();
 
                 //do we have an ID range?
                 if (Settings.Default.MaxID == 0) {
@@ -57,16 +103,6 @@ namespace SyncClient
                 Repository.Repository.Reseed(Settings.Default.MinID, Settings.Default.MaxID, db);
         }
 
-        private static void SynchroniseData(ConnectionProperties source, ConnectionProperties destination)
-        {
-            DataProject project = new DataProject(source, destination);
-#pragma warning disable 612
-            project.ComparisonOptions.CompareAdditionalRows = false;
-#pragma warning restore 612
-            project.ComparedObjects.IncludeAllInSynchronization();
-            Synchronise(project);
-        }
-
         private static void Synchronise(ProjectBase project)
         {
             try {
@@ -74,6 +110,7 @@ namespace SyncClient
                 if (errors.Length > 0)
                     throw new ApplicationException(string.Join("\n", errors));
             }
+            catch (NoSelectedForOperationObjectsException) { }
             catch (UnhandledException e) {
                 if (!(e.InnerException is NoSelectedForOperationObjectsException))
                     throw;
