@@ -118,5 +118,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Server.publish.xml" />
+    <None Include="Test Data.sql" />
   </ItemGroup>
 </Project>
