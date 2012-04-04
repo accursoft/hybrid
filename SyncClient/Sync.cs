@@ -31,12 +31,14 @@ namespace SyncClient
                     StructureProject structure = new StructureProject(remote, local);
 
                     structure.ComparisonOptions.IgnoreIdentitySeedAndIncrement = true;
-
                     structure.MappedObjects.ExcludeAllFromComparison();
-                    structure.MappedTables.IncludeInComparison(Settings.Default.Tables.Split(',').Select(t => '^' + t + '$').ToArray());
-                    structure.MappedTriggers.IncludeInComparison(Settings.Default.Tables.Split(',').Select(t => '^' + t + "_TimeStamp$").ToArray());
-                    structure.ComparedObjects.IncludeAllInSynchronization();
 
+                    //select the desired tables and triggers
+                    var tables = Settings.Default.Tables.Split(',');
+                    structure.MappedTables.IncludeInComparison(tables.Select(t => '^' + t + '$').ToArray());
+                    structure.MappedTriggers.IncludeInComparison(tables.Select(t => '^' + t + "_TimeStamp$").ToArray());
+
+                    structure.ComparedObjects.IncludeAllInSynchronization();
                     Synchronise(structure);
 
                     Settings.Default.SchemaVersion = version;
