@@ -17,6 +17,11 @@
         <li>Install SQL Server.</li>
         <li>Build the Server project, then deploy the SQLCMD script from its output folder. Alternatively, double-click Server.publish.xml do build and publish.</li>
     </ol>
+    <p>When deploying synchronisation capabilities to an existing database, the following two adjustments must be made to each table:</p>
+    <ol>
+        <li>Add a timestamp column.</li>
+        <li>Add a trigger that will update the timestamp when a row changes.</li>
+    </ol>
     <h2>Web Server</h2>
     <ol>
         <li>Install the Services project as an IIS application.</li>
@@ -28,21 +33,24 @@
         <li>Install SQL Server Express on the client.</li>
         <li>Create an empty database called Client.</li>
         <li>Install the client application.</li>
-        <li>Edit the client&#39;s .config to ensure that the connection strings and WCF configuration are correct.</li>
+        <li>Edit the client&#39;s .config to ensure that the connection strings and WCF configuration are correct.<ol>
+            <li>The Tables setting is a CSV list of which tables to synchronise.</li>
+            </ol>
+        </li>
     </ol>
     <h2>ApexSQL Diff API</h2>
     <p>ApexSQL&#39;s licensing requires certain files to be available to the application at runtime. These are copied to the output directory by post-build events in the
         Services and Client applications. Beware that the WCF services will pop up a modal dialog upon the first schema synchronisation during the trial period, so someone
         has to be watching out for this.</p>
     <h3>x64</h3>
-    <p>The ApexSQL assemblies are x86. WcfSvcHost runs as x64. If you're running the solution from VS on an x64 machine, open a command prompt with administrator privileges
+    <p>The ApexSQL assemblies are x86. WcfSvcHost runs as x64. If you're running the solution from the IDE on an x64 machine, open a Visual Studio Command Prompt with administrator privileges
         at <a href="file:///C:/Program Files (x86)/Microsoft Visual Studio 10.0/Common7/IDE">C:\Program Files (x86)\Microsoft Visual Studio 10.0\Common7\IDE</a>. Then run:</p>
     <pre>copy WcfSvcHost.exe WcfSvcHost.exe.bak
-corflags /32BIT+ WcfSvcHost.exe
+corflags /32BIT+ WcfSvcHost.exe /Force
 sn -Vr WcfSvcHost.exe</pre>
     <h3>Synchronisation Conflicts</h3>
     <p>In the event of a conflict, the server always wins. This can probably be changed to client always wins, but the API does not allow for anything else.</p>
-    <p>Deleting rows from the client will not delete corresponding rows on the server.</p>
+    <p>Deleted rows are not synchronised.</p>
     <h2>Diagnostics</h2>
     <p>The client and server are both configured to write WCF trace logs. The client also writes a plain-text error log. Inspect these to determine why it isn&#39;t working.
     </p>

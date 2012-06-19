@@ -4,3 +4,7 @@ bin
 obj
 *.suo
 packages
+debug
+Sandbox
+*.user
+*.dbmdl
