@@ -25,7 +25,7 @@ When deploying synchronisation capabilities to an existing database, the followi
 1. Create an empty database called Client.
 1. Install the client application.
 1. Edit the client's .config to ensure that the connection strings and WCF configuration are correct.
-1. The Tables setting is a CSV list of which tables to synchronise.
+1. The `Tables` setting is a CSV list of which tables to synchronise.
 
 ## ApexSQL Diff API
 
@@ -62,7 +62,7 @@ The client and server are both configured to write WCF trace logs. The client al
 ## The IdRanges Table
 
 When a client connects to the server for the first time, it requests an ID range. These are tracked in the IdRanges table, and are negative. The server uses positive IDs.
-The IdRange setting in the Service's .config defines how many IDs to allocate to each client. The same range is used across all tables.
+The `IdRange` setting in the Service's .config defines how many IDs to allocate to each client. The same range is used across all tables.
 
 ## Solution Dependencies
 
@@ -74,6 +74,6 @@ The IdRange setting in the Service's .config defines how many IDs to allocate to
 
 ## Schema Synchronisation
 
-The service and client have a SchemaVersion setting. Before the client synchronises, it checks the server's schema version. If this is greater than the client's
-schema, it will download a snapshot of the server's schema, and synchronise its local database. The ApexSqlTables setting in SyncClient is a comma-delimited list
+The service and client have a `SchemaVersion` setting. Before the client synchronises, it checks the server's schema version. If this is greater than the client's
+schema, it will download a snapshot of the server's schema, and synchronise its local database. The `ApexSqlTables` setting in SyncClient is a comma-delimited list
 of regular expressions indicating which tables to synchronise. Ensure that none of the expressions match tracking tables.
